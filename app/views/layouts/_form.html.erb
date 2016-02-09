@@ -1,0 +1,9 @@
+<ul>
+  <% objects.each do |o| %>
+    <% if defined? o.content %>
+      <li><%= link_to o.content, o  %></li>
+    <%elsif defined? o.name %>
+      <li><%= link_to o.name, o %></li>
+    <% end %>
+  <% end %>
+</ul>

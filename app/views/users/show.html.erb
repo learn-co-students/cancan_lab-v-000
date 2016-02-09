@@ -1,0 +1,8 @@
+<h2><%= @user.name %></h2>
+
+<ul>
+  <% @user.notes.each do |note| %>
+    <li><%= link_to note.content, note %></li>
+    <li><%= note.reader %></li>
+  <% end %>
+</ul>
