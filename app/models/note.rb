@@ -3,23 +3,23 @@ class Note < ActiveRecord::Base
   has_many :viewers
   has_many :readers, through: :viewers, source: :user
 
-  before_save :ensure_owner_can_read
+  before_save :can_read
 
   def visible_to
-    readers.map { |u| u.name }.join(', ')
+    readers.map(&:name).join(', ')
   end
 
   def visible_to=(readers)
-    self.readers = readers.split(",").collect do |name|
+    self.readers = readers.split(', ').map do |name|
       User.find_by(name: name.strip)
     end.compact
   end
 
   private
 
-  def ensure_owner_can_read
-   if user && !readers.include?(user)
-     readers << user
-   end
- end
+  def can_read
+    if user && !readers.include?(user)
+      readers << user
+    end
+  end
 end

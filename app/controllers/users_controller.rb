@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  has_many :notes
+  has_many :viewers
+
+
   def index
     @users = User.all
   end

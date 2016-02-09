@@ -1,12 +1,5 @@
 class NotesController < ApplicationController
-  load_and_authorize_resource only: [:edit, :show, :update]
-
-  def index
-    @notes = Note.all
-  end
-
-  def new
-  end
+  load_and_authorize_resource only: [:show, :edit, :update]
 
   def create
     if logged_in?
@@ -15,9 +8,6 @@ class NotesController < ApplicationController
       note.save
     end
     redirect_to '/'
-  end
-
-  def edit
   end
 
   def update
