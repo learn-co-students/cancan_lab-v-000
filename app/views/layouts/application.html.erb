@@ -7,6 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= link_to "Users", users_path %>
+<%= link_to "Notes", notes_path %>
+
+<button><%= link_to "Log in", { controller: "sessions", action: "create", method: "POST"} %></button>
 
 <%= yield %>
 

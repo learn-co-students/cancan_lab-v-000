@@ -27,13 +27,15 @@ RSpec.describe NotesController, type: :controller do
       
       content = 'oh so secret'
       post :create, note: {content: content, visible_to: ''}
+
       note_id = Note.last.id
       assert Note.find(note_id).content == content
 
       new_content = 'a different secret'
-      post :update, id: note_id, note: {content: new_content, visible_to: 'alice'}
+      post :update, id: note_id, note: {content: new_content, visible_to: alice}
       assert_redirected_to '/'
       note = Note.find(note_id)
+
       assert note.content == new_content
       assert note.readers == [alice, beth]
     end
