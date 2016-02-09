@@ -32,7 +32,7 @@ RSpec.describe NotesController, type: :controller do
       assert Note.find(note_id).content == content
 
       new_content = 'a different secret'
-      post :update, id: note_id, note: {content: new_content, visible_to: alice}
+      post :update, id: note_id, note: {content: new_content, visible_to: 'alice'}
       assert_redirected_to '/'
       note = Note.find(note_id)
 
