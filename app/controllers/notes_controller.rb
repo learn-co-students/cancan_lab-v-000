@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource  only: [:edit, :show, :update]
 
   # GET /notes
   # GET /notes.json
@@ -25,31 +26,21 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
-
-    respond_to do |format|
-      if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        format.json { render :show, status: :created, location: @note }
-      else
-        format.html { render :new }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
+    @note.user=current_user
+    if @note.save
+      redirect_to root_path
     end
   end
 
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
   def update
-    respond_to do |format|
-      if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
-        format.json { render :show, status: :ok, location: @note }
-      else
-        format.html { render :edit }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
-    end
+    #byebug
+    @note=Note.find(params[:id])
+    @note.update(note_params)
+    redirect_to root_path
   end
+
 
   # DELETE /notes/1
   # DELETE /notes/1.json
@@ -69,6 +60,10 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params[:note]
+      params.require(:note).permit(:content, :visible_to)
+    end
+
+    def current_user
+      session[:user_id] ? User.find(session[:user_id]) : nil
     end
 end

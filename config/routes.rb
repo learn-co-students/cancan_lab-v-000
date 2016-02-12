@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
+  resources :notes, only: [:create, :show, :index, :edit, :update]
+  root 'notes#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
