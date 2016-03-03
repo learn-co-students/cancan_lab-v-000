@@ -1,0 +1,15 @@
+<%= form_for note do |f| %>
+
+	<%= f.label :content %><br>
+	<%= f.text_field :content %><br>
+	
+<p></p>
+	People who can view:</br>
+
+	<input type='text' name="note[visible_to]" value='<%="#{note.visible_to unless note.visible_to.nil?}"%>'></br>
+	
+
+	<%= f.submit %>
+
+
+<% end %>

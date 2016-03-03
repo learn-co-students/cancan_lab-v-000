@@ -1,0 +1,11 @@
+<% @notes.each do |note| %>
+	<p><%= link_to note.content, note_path(note) %></p>
+	<% if can? :update, note %>
+		<%= link_to "Edit", edit_note_path(note) %><br>
+	<% end %>
+	<% if can? :destroy, note %>
+		<%= link_to "Delete", "notes/#{note.id}", method: "delete" %><br>
+	<% end %>
+<% end %>
+
+

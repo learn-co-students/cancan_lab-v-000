@@ -1,0 +1,14 @@
+<%= @note.content %>
+
+<ul>
+	<% @note.readers.each do |reader| %>
+		<li><%= reader.name %></li>
+	<% end %>
+	<% if can? :update, @note %>
+		<%= link_to "Edit", edit_note_path(@note) %>
+	<% end %>
+	<% if can? :destroy, @note %>
+		<%= link_to "Delete", "/notes/#{@note.id}", method: "delete" %>
+	<% end %>
+	
+</ul>
