@@ -3,17 +3,15 @@ class Ability
 
   def initialize(user)
     
-    unless user.nil?
-        can :create, Note
-    end 
+    can :manage, Note, user: user
 
     can :read, Note do |note|
         note.readers.include?(user) || note.user == user
     end
 
-    can [:update,:destroy], Note do |note|
-        note.user == user
-    end
+    # can [:update,:destroy], Note do |note|
+    #     note.user == user
+    # end
 
     
 
