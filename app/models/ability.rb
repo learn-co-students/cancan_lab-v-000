@@ -2,6 +2,16 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
+
+    can :read, Note do |note|
+  # TODO
+        note.user == user || note.viewers.map {|f| f.user_id}.any? {|f| f == user.id}
+    end
+
+    can :update, Note do |note|
+        note.user == user 
+    end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
