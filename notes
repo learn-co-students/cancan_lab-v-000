@@ -1,6 +1,6 @@
 notes
 
-need accepts nested attributes
+need accepts nested attributes.  don't really remember how to use that.  i made a methods to create the attributes.  should i just be calling those?  i feel like rails can do that automatically when i use strong params
 
 
 questions

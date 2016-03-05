@@ -5,7 +5,6 @@ class Ability
 
 
     can :read, Note do |note|
-  # TODO
         note.user == user || note.viewers.map {|f| f.user_id}.any? {|f| f == user.id}
     end
 

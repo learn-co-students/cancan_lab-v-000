@@ -3,10 +3,9 @@ class Note < ActiveRecord::Base
   has_many :readers, through: :viewers, source: :user
   belongs_to :user
 
-  accepts_nested_attributes_for :user
+  # accepts_nested_attributes_for :viewers
   ##### is the above correct? #######
   def visible_to
-    # binding.pry
     array = []
     array << self.readers
     array << self.user
