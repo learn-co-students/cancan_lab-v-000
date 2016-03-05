@@ -6,5 +6,18 @@ class Note < ActiveRecord::Base
   accepts_nested_attributes_for :user
   ##### is the above correct? #######
   def visible_to
+    # binding.pry
+    array = []
+    array << self.readers
+    array << self.user
+    array.compact.flatten.map {|user| user.name}.join(", ")
+  end
+
+  def visible_to=(arg)
+    arg.split(",").each do |name|
+      name.strip!
+      user = User.find_by(name: name)
+      user.readable << self
+    end
   end
 end
