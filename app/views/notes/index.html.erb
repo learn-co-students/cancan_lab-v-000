@@ -1,0 +1,10 @@
+<h1>All Notes</h1>
+<% if @notes %>
+  <% @notes.each do |note| %>
+  <ul>
+    <li><%= note.user.name %> - <%= note.content %></li>
+  </ul>
+  <% end %>
+  <% else %>
+    <%= @message %>
+<% end %>
