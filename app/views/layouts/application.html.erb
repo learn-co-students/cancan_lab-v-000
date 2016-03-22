@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<%= link_to 'Home', root_path %><br>
+<% if !current_user.nil? %>
+  <%= link_to 'Sign out', logout_path, method: :delete %>
+<% else %>
+  <%= link_to 'Sign in', login_path %>
+<% end %>
+
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
 <%= yield %>
 
 </body>

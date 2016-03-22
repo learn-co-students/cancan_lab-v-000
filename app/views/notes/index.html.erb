@@ -1,0 +1,5 @@
+<h1>Notes</h1>
+
+<% @notes.each do |note| %>
+  <div><%= link_to "Note ##{note.id}", note_path(note) %></div>
+<% end %>
