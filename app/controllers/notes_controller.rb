@@ -11,7 +11,8 @@ class NotesController < ApplicationController
   def create
     if current_user
       @user = User.find(current_user.id)
-      note = @user.notes.create(note_params)
+      note = @user.notes.create(content: params[:note][:content])
+      note.visible_to = params[:note][:visible_to] if !params[:note][:visible_to].empty?
       note.readers << current_user if current_user
       redirect_to '/'
     else
