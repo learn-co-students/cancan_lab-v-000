@@ -1,0 +1,7 @@
+<h1>Edit Note:</h1>
+
+<%= form_for ([@user, @note]) do |f| %>
+   Content:<%= f.text_field :content %>
+   Allowed Viewers:<%= f.text_field :visible_to %> 
+    <% f.submit %>
+<% end %>
