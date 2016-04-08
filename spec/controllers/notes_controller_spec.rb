@@ -5,6 +5,9 @@ RSpec.describe NotesController, type: :controller do
   describe 'post create' do
     it "can't create a note if you're not logged in" do
       post :create, note: {content: 'hush', visible_to: ''}
+      note = Note.last
+      last_note_content = note.content if note
+      assert last_note_content != 'hush'
       assert_redirected_to '/'
     end
     it "can create a note if you're logged in" do
