@@ -28,5 +28,12 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+# byebug
+    can :manage, Note, user: user
+
+    can :read, Note do |note|
+        note.readers.include?(user)
+    end
+# byebug
   end
 end
