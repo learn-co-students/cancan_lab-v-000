@@ -27,6 +27,7 @@ RSpec.describe Ability do
 
   describe 'users' do
     it "can :read their own posts" do
+# byebug
       users.each do |name, user|
         assert abilities[name].can? :read, private_notes[name]
       end
