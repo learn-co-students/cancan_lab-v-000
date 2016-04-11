@@ -7,5 +7,19 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  def login
+    session[:user_id] = params[:id]
+  end
 
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def logged_in?
+    !current_user.nil?
+  end
+
+  def logout
+    session[:user_id].delete
+  end
 end

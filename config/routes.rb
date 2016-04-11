@@ -1,23 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :sessions
-  # get 'sessions/new'
+  resources :notes
+  
+  get 'sessions/new', as: "login"
 
-  # get 'sessions/create'
+  get 'sessions/create'
 
-  # get 'sessions/destroy'
+  get 'sessions/destroy', as: "logout"
 
-  get 'notes/new'
-
-  get 'notes/create'
-
-  get 'notes/edit'
-
-  get 'notes/update'
-
-  get 'notes/destroy'
-
-  get 'users/create'
+  post 'users/create'
 
   get 'static/home'
 
