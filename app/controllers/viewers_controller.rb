@@ -1,2 +1,0 @@
-class ViewersController < ApplicationController
-end

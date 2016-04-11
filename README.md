@@ -47,11 +47,11 @@ If your ActiveRecord relationships have been set up right, this should be fine.
 
 Now, go through the remaining tests and ensure they pass. To pass the controller tests, make calls to `authorize!` or `load_and_authorize_resource` in your `NotesController`.
 
-[CanCanCan]: https://github.com/CanCanCommunity/cancancan
-[defining_abilities]: https://github.com/CanCanCommunity/cancancan/wiki/defining-abilities
 
     can :read, Note do |note|
       # TODO
     end
 
+
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/cancan_lab'>Cancan Lab</a> on Learn.co and start learning to code for free.</p>
+>>>>>>> master
