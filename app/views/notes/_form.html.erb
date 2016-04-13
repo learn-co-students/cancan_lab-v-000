@@ -1,0 +1,9 @@
+<%= form_for note do |f| %>
+  <%= f.label :content %>
+  <%= f.text_area :content %><br>
+
+  <%= f.label "Visible to: (as a comma-separated list)" %>
+  <%= f.text_field "visible_to" %><br>
+
+  <%= f.submit %>
+<% end %>
