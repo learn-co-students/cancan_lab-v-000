@@ -5,6 +5,7 @@ class NotesController < ApplicationController
   end
 
   def show
+    authorize! :read, @note
   end
 
   def new
@@ -29,6 +30,7 @@ class NotesController < ApplicationController
   end
 
   def update
+    authorize! :update, @note
     @note.update(note_params)
     if @note.save
       redirect_to root_path
