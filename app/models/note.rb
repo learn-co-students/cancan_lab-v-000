@@ -1,6 +1,7 @@
 class Note < ActiveRecord::Base
   has_many :viewers
   has_many :readers, through: :viewers, source: :user
+  belongs_to :user
 
   def visible_to=(list_of_names)
     list_of_names.split(", ").each do |name|
