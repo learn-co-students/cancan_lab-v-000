@@ -1,0 +1,10 @@
+<%= form_for note do |f| %>
+
+  <%= f.label :content %>
+  <%= f.text_area :content, placeholder: 'Note contents' %>
+
+  <%= f.label :visible_to %>
+  <%= f.text_area :visible_to, placeholder: '' %>
+
+  <%= f.submit %>
+<% end %>
