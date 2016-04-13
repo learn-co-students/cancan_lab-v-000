@@ -1,0 +1,6 @@
+<h3><%= title(note) %></h3>
+<p>
+  visible to: <%= note.visible_to %>
+  <%= ' -- ' if can? :update, note %>
+  <%= link_to "Edit", edit_note_path(note) if can? :update, note %>
+</p>

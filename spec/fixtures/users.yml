@@ -2,13 +2,13 @@
 
 alice:
   id: 1
-  name: alice
+  name: "alice"
 
 beth:
   id: 2
-  name: beth
+  name: "beth"
 
 eve:
   id: 3
-  name: eve
+  name: "eve"
 
