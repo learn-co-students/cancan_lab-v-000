@@ -22,7 +22,7 @@ class NotesController < ApplicationController
 
   def edit
     if current_user
-      render partial: 'form', locals: {note: Note.new}
+      render partial: 'form', locals: {note: Note.find_by(user: session[:user_id])}
     else
       redirect_to '/login'
     end
