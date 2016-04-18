@@ -1,0 +1,4 @@
+  <br>
+<% @notes.each do |note| %>
+  <%=link_to note.content, edit_note_path(note) %><br>
+<% end %>
