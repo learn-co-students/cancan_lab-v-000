@@ -1,12 +1,13 @@
 class NotesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource only: [:edit, :update, :show]
   def new
     @note = Note.new
   end
 
   def create
     @note = Note.new(note_params)
-    if @note.save
+    @note.user = current_user
+    if @note.save!
       redirect_to '/'
     else
       render :new
@@ -23,13 +24,8 @@ class NotesController < ApplicationController
   end
 
   def update
-    @note = Note.find(params[:id])
-    if @note.update(note_params)
-      redirect_to '/'
-    else
-      render :edit
-    end
-
+    @note.update(note_params)
+    redirect_to '/'
   end
 
   def destroy
@@ -39,6 +35,6 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :visible_to)
   end
 end
