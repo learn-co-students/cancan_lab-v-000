@@ -12,6 +12,7 @@ RSpec.describe NotesController, type: :controller do
       content = 'secret message'
       session[:user_id] = alice.id
       post :create, note: {content: content, visible_to: ''}
+
       assert_redirected_to '/'
       note = Note.last
       assert note.content == content
