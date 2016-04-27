@@ -15,6 +15,7 @@ RSpec.describe NotesController, type: :controller do
       assert_redirected_to '/'
       note = Note.last
       assert note.content == content
+      
       assert note.readers == [alice]
       assert note.user = alice
     end
@@ -34,6 +35,7 @@ RSpec.describe NotesController, type: :controller do
       post :update, id: note_id, note: {content: new_content, visible_to: 'alice'}
       assert_redirected_to '/'
       note = Note.find(note_id)
+      
       assert note.content == new_content
       assert note.readers == [alice, beth]
     end
