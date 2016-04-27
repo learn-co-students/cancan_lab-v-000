@@ -1,0 +1,13 @@
+<div class="note">
+	<div>
+		<%= note.content %>
+	</div>
+	<div>
+		<%= note.user.name %>
+	</div>
+	<div>
+		<% if can? :update, note %>
+			<%= link_to 'edit', edit_note_path(note) %>
+		<% end %>
+	</div>
+</div>
