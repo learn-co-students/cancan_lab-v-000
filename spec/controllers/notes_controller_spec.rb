@@ -37,7 +37,6 @@ RSpec.describe NotesController, type: :controller do
       note = Note.find(note_id)
       
       assert note.content == new_content
-      binding.pry
       assert note.readers == [alice, beth]
     end
   end
