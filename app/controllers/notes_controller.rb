@@ -33,7 +33,6 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     @note.update(note_params)
     if @note.save
-      @note
       redirect_to '/'
     else
       render :edit
