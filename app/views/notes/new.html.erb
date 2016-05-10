@@ -1,0 +1,6 @@
+<% if can? :update, @note %>
+
+  <h1>New Note:</h1>
+  <%= render "form", locals: {note: @note} %>
+  
+<% end %>
