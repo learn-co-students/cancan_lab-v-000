@@ -4,6 +4,10 @@ class NotesController < ApplicationController
   skip_authorize_resource :only => :index
 
   def index
+    @notes = Note.none
+    if current_user
+      @notes = current_user.readable
+    end
   end
 
   def new
@@ -12,7 +16,6 @@ class NotesController < ApplicationController
   def create
     @note = current_user.notes.build(note_params)
     if @note.save
-      @note.readers << @note.user
       redirect_to root_path
     else
       render :new
@@ -40,7 +43,7 @@ class NotesController < ApplicationController
   # end
 
   def note_params
-    params.require(:note).permit(:content, :visible_to, :user)
+    params.require(:note).permit(:content, :visible_to)
   end
 
 end
