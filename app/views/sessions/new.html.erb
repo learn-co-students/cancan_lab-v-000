@@ -1,0 +1,6 @@
+<h3>Sign up or Login</h3>
+<%=form_for :user, url: '/users' do |f|%>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%=f.submit "Signup/Login"%>
+  <%end%>

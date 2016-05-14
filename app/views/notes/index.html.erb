@@ -1,0 +1,14 @@
+<h3>All Notes</h3>
+<% if @notes%>
+  <% @notes.each do |note|%>
+  <li>
+    <ul><%=note.user.name%>: <%=note.content%></ul>
+
+    <%end%>
+  </li>
+<%else %>
+  <%=@message%>
+<%end%>
+
+<%= link_to "Create New Notes", new_note_path%>
+<%= link_to "logout", 'users#destroy' %>
