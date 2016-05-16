@@ -1,0 +1,6 @@
+<h1>Log in bellow</h1>
+<%= form_for(@user, url: '/login') do |f| %>
+  <%= f.text_label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
