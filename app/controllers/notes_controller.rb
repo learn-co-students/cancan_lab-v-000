@@ -1,12 +1,15 @@
+require 'pry'
 class NotesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource only: [:edit, :show, :update]
 
   def index
-    @notes = Note.all
+    @notes = Note.none
+    if current_user
+      @notes = current_user.readable
+    end
   end
 
   def show
-    set_note
   end
 
   def new
@@ -14,23 +17,20 @@ class NotesController < ApplicationController
   end
 
   def create
-    current_user.notes.create(note_params)
-    redirect_to notes_path
+    note = Note.new(note_params)
+    note.user = current_user
+    note.save!
+    redirect_to '/'
   end
 
   def edit
-    set_note
   end
 
   def update
-    Note.find(params[:id]).update(note_params)
-    redirect_to notes_path
+    @note.update(note_params)
+    redirect_to '/'
   end
 
-  def destroy
-    set_note
-    @note.destroy
-  end
 
   private
 
@@ -38,7 +38,4 @@ class NotesController < ApplicationController
     params.require(:note).permit(:content, :visible_to)
   end
 
-  def set_note
-    @note = Note.find(params[:id])
-  end
 end

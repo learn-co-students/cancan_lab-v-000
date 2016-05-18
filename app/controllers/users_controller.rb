@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def create
-    @user = User.create(user_params)
+    return head(:unprocessable) unless params[:name]
+    session[:user_id] = User.find_or_create_by(name: params[name])
+    redirect_to :back
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:name)
+  def destroy
+    session.delete :user_id
+    redirect_to :back
   end
 end
