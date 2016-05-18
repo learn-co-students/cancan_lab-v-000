@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe NotesController, type: :controller do
   fixtures :users
@@ -35,7 +36,7 @@ RSpec.describe NotesController, type: :controller do
       assert_redirected_to '/'
       note = Note.find(note_id)
       assert note.content == new_content
-      assert note.readers == [alice, beth]
+      assert note.readers == [beth, alice]
     end
   end
 end
