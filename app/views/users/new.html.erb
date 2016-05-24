@@ -1,4 +1,6 @@
-<%=form_for @user, url: sessions_path do |f| %>
-<%=f.text_field :name%>
-<%=f.submit 'login'%>
+<h1>Signup</h1>
+<%=form_for @user do |f| %>
+<%= f.label :name%>
+<%=f.text_field :name%> <br>
+<%=f.submit 'signup'%>
 <%end%>

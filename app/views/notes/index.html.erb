@@ -1,0 +1,19 @@
+<h3>Hi <%=current_user.name%> you have <%=current_user.notes.size%> notes</h3>
+
+<%= link_to "Add New Note", new_note_path%>
+<%current_user.notes.each do |note|%>
+  <%if note.user == current_user%>
+    <li><%=note.content%>
+    - <%=link_to "Edit", edit_note_path(note)%></li>
+    <%end%>
+<%end%>
+
+<h4>Friends Notes</h4>
+
+<%current_user.readable.each do |note|%>
+
+  <%if note.user =! current_user%>
+    <li> <%=note.content%> - Written by ~ <%=note.user.name if    note.user%> </li>
+  <%end%>
+
+<%end%>

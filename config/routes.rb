@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :notes
   post '/users' => 'users#create'
   get '/users/new' => 'users#new'
+  get '/users/login' => 'users#login'
   post '/sessions' => 'sessions#create'
-  get  '/sessions/new' => 'sessions#new'
+  post  '/sessions/new' => 'sessions#new'
 end

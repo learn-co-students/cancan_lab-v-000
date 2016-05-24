@@ -3,6 +3,7 @@ class NotesController < ApplicationController
 
   def index
     @notes= Note.all
+
   end
 
   def create
@@ -18,12 +19,10 @@ class NotesController < ApplicationController
   def update
 
     if logged_in?
-      
+
         @note.update(note_params)
-        binding.pry
       redirect_to root_path
     else
-      binding.pry
       redirect_to root_path
     end
 
@@ -41,7 +40,7 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:content,:user, :readers)
+    params.require(:note).permit(:content, :visible_to, :user_id, :readers)
   end
 
 end
