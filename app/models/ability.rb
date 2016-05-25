@@ -8,8 +8,21 @@ class Ability
       user
     end
 
+    can :read, Note do |note|
+      user== note.user
+    end
+
+    can :read, Note do |note|
+      user.readable.include?(note)
+    end
+
+
     can :update, Note do |note|
-      user
+      if note.user_id
+        note.user_id == user.id
+      else
+        user
+      end
     end
 
     can :manage, Note do |note|

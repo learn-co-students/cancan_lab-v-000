@@ -12,6 +12,7 @@
 
 <%current_user.readable.each do |note|%>
 
+
   <%if note.user =! current_user%>
     <li> <%=note.content%> - Written by ~ <%=note.user.name if    note.user%> </li>
   <%end%>

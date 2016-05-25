@@ -17,15 +17,14 @@ class NotesController < ApplicationController
   end
 
   def update
-
     if logged_in?
-
-        @note.update(note_params)
+      note = Note.find_by(id: params[:id])
+      note.update(note_params)
+      note.readers << current_user
       redirect_to root_path
     else
       redirect_to root_path
     end
-
   end
 
 
@@ -40,7 +39,7 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:content, :visible_to, :user_id, :readers)
+    params.require(:note).permit(:content, :visible_to, :user_id)
   end
 
 end

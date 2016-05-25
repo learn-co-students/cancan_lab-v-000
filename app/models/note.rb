@@ -6,20 +6,15 @@ class Note < ActiveRecord::Base
   accepts_nested_attributes_for :readers
 
   def visible_to
-    return unless !readers.empty?
-    self.readers
+    readers.map { |u| u.name }.join(', ')
   end
 
 
- def visible_to=(readers)
 
-    return unless !readers.empty?
-    readers = readers.split(",")
-      readers.each do |reader|
-        self.readers << User.find_by(name: reader) if User.exists?(name: reader)
+  def visible_to=(readers)
+      self.readers = readers.split(',').map do |name|
+        User.find_by(name: name.strip)
       end
-
-
   end
 
 end
