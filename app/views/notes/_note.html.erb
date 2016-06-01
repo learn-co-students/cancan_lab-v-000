@@ -1,0 +1,6 @@
+<%= content_tag :div, note.content, class: "note-content" %>
+<%= content_tag :div, note.user.name, class: "note-author" %>
+
+<% if can? :update, note %>
+  <%= link_to 'Edit', edit_note_path(note) %>
+<% end %>
