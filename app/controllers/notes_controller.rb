@@ -9,8 +9,12 @@ load_and_authorize_resource only: [:edit, :show, :update]
 			
 		
 			note = Note.create(post_params)
-			@user.notes << note
+			note.user = @user
+			
+			
+			#@user.notes << note
 			note.readers << @user
+			note.save
 		end	
 		redirect_to root_path
 	end
