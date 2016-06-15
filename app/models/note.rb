@@ -6,8 +6,8 @@ class Note < ActiveRecord::Base
   before_save :add_owner_to_readers
 
   def visible_to=(user_list)
-    users = user_list.gsub(/\s+/, "").split(',').each do |user|
-      self.readers << User.find_by(:name => user)
+    users = user_list.gsub(/\s+/, "").split(',').each do |name|
+      self.readers << User.find_by(:name => name)
     end
   end
 
