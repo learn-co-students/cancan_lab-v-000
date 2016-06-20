@@ -1,0 +1,25 @@
+     <% if !current_user %>
+      <%= form_tag( '/login', method: :post ) do %>
+        <input name=name placeholder='sign in with a name'>
+        <%= submit_tag "login" %>
+      <% end %>
+    
+    <% else %>
+
+      <%= current_user.name %>, 
+      <%= link_to "write a note", new_note_path %> 
+      <%= form_tag('/logout', method: :post) do %>
+        <%= submit_tag "or log out" %>
+      <% end %>
+      <h3>Your readable notes:</h3>
+        <% @notes.each do |note| %>
+          <p><%=note.content%></p>
+          <p>By <%=note.user.name%></p>
+           <% if can? :update, @note %>
+              <%= link_to "Edit", edit_note_path(@note) %>
+            <% end %>
+        <%end%>
+        <hr>
+
+    <% end %>
+
