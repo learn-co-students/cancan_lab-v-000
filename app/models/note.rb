@@ -1,20 +1,20 @@
 class Note < ActiveRecord::Base
+  belongs_to :user
   has_many :viewers
 has_many :readers, through: :viewers, source: :user
 
 
   before_save :ensure_owner_can_read
 
-  def visible_to=(new_readers)
-    self.readers = new_readers.split(',').collect do |name|
-      User.find_by(name: name.strip)
-    end.compact
+ 
+  def visible_to
+    readers.map { |u| u.name }.join(', ')
   end
 
-  def visible_to
-    self.readers.collect do |reader|
-      reader.name
-    end.join(", ")
+  def visible_to=(new_readers)
+    self.readers = new_readers.split(',').map do |name|
+      User.find_by(name: name.strip)
+    end.compact
   end
 
   private

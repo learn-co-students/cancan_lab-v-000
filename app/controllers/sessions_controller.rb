@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-    def new
-  end
 
   def create
     return head(:unprocessable) unless params[:name]
