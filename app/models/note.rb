@@ -5,10 +5,10 @@ class Note < ActiveRecord::Base
   
   
   def visible_to=(list)
-    list.split(",").each {|reader| self.readers << User.find_or_create_by(name: reader)}
+    list.split(", ").each {|reader| self.readers << User.find_or_create_by(name: reader)}
   end
   
   def visible_to
-    self.readers
+    self.readers.map {|reader| reader.name}.join ", "
   end
 end
