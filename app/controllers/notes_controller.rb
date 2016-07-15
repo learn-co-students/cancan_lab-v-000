@@ -4,11 +4,15 @@ class NotesController < ApplicationController
   def create
     @note = Note.create(note_params)
     @note.readers << current_user
+    @note.user = current_user
+    @note.save
     redirect_to "/"
   end
   
   def update
     @note.update(note_params)
+    @note.readers << current_user
+    @note.readers.each {|x| puts x.name}
     @note.save
     redirect_to "/"
   end
