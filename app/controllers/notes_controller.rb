@@ -3,12 +3,13 @@ class NotesController < ApplicationController
   
   def create
     @note = Note.create(note_params)
-    @note.readers << current_user if !current_user.nil?
+    @note.readers << current_user
     redirect_to "/"
   end
   
   def update
     @note.update(note_params)
+    @note.save
     redirect_to "/"
   end
   

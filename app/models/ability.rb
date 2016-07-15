@@ -6,9 +6,13 @@ class Ability
       
       unless user.nil? # guest
           can :create, Note
-          can :update, Note, { user_id: user.id }
+          can :update, Note#, { user_id: user.id }
+          can :read, Note do |note|
+            note.readers.include? user || note.user == user
+          end 
+          can :read, Note, { user_id: user.id }
       end
-      can :read, Note
+      
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
