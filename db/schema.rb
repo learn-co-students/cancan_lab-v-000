@@ -11,6 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160722200406) do
+
+  create_table "notes", force: :cascade do |t|
+    t.text    "content"
+    t.integer "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "viewers", force: :cascade do |t|
+    t.integer "note_id"
+    t.integer "user_id"
+  end
+
+  add_index "viewers", ["note_id"], name: "index_viewers_on_note_id"
+  add_index "viewers", ["user_id"], name: "index_viewers_on_user_id"
+  
 
 end
