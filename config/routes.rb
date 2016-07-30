@@ -1,21 +1,14 @@
 Rails.application.routes.draw do
-  get 'users/create'
+  resources :notes
 
-  get 'notes/index'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  post '/logout' => 'sessions#destroy'
+  #get '/logout' => 'sessions#destroy'
 
-  get 'notes/new'
+  resources :users, only: [:new, :create]
 
-  get 'notes/create'
-
-  get 'notes/show'
-
-  get 'notes/edit'
-
-  get 'notes/update'
-
-  get 'notes/destroy'
-
-  root 'notes/index'
+  root 'notes#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

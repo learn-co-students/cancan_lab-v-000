@@ -7,8 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+  <% end -%>
 <%= yield %>
+<br><br>
+  <% if !session[:user_id].nil? %>
+    #--
+    <%= link_to 'Logout', logout_path, :method => :post %>
+    --#
+  <% end %>
 
 </body>
 </html>
