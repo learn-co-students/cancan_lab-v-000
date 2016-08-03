@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
   
-  resources :notes
+  resources :notes, :sessions, :users
   
-  root 'notes#index'
-  
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  
-  get 'users/create'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

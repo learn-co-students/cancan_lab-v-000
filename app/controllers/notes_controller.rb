@@ -1,20 +1,21 @@
 class NotesController < ApplicationController
+  
+  load_and_authorize_resource only: [:update]
+
+  #figures out from name of controller, what resource is loaded and authorized. 
+  # for index it will do @notes = Notes.all for you. 
+
   def new
     @note = Note.new
-    @note.readers.build
   end
 
   def create
-    if session[:user_id]
-      @user = User.find(session[:user_id])
-      note = Note.create(notes_params)
-      note.readers << @user 
-      note.visible_to=(params[:note][:visible_to])
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end 
-  end
+    @note = Note.new(notes_params)
+    @note.user = current_user
+    @note.save!
+    redirect_to '/'
+  end  
+
 
   def edit
     @note = Note.find(params[:id])
@@ -22,14 +23,8 @@ class NotesController < ApplicationController
 
   def update
     @note = Note.find(params[:id])
-    @user = User.find(session[:user_id])
-    if @note.readers.include?(@user)
-      @note.update(notes_params)
-      @note.visible_to=(params[:note][:visible_to])
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end     
+    @note.update(notes_params)
+    redirect_to '/'
   end
 
 
@@ -37,14 +32,20 @@ class NotesController < ApplicationController
   end
 
   def index
-    @user = User.find(session[:user_id])
   end
 
   def destroy
+    @note = Note.find(params[:id])
   end
+
+  #load_and_authorize_resource param_method: :notes_params
+  ## need to have visible_to in the params as well. 
 
 
   def notes_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :visible_to)
   end
+
+  #create_params - will build the object for you in the create method. 
+  #we will need to set the current user. current_user 
 end
