@@ -1,0 +1,5 @@
+<%= form_for @note do |f| %>
+  Content: <%= f.text_field :content %>
+  Users: <%= f.text_area :visible_to %>
+    <%= f.submit "Create Note" %>
+    <% end %>
