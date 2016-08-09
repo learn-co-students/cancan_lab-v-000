@@ -1,0 +1,6 @@
+<h1>All Notes</h1>
+<ul>
+<% @notes.each do |n| %> 
+<li><%= link_to "Note #{n.id}", note_path(n) %></li>
+<% end %>
+</ul>
