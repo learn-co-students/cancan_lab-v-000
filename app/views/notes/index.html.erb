@@ -1,0 +1,6 @@
+<% @notes.each do |note| %>
+<%= note.content %>
+  <%= note.readers.each do |reader| %>
+  <%= reader.name %>
+  <% end %>
+<% end %>
