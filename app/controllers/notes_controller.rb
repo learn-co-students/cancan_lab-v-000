@@ -40,7 +40,7 @@ private
   end
 
   def note_params
-    params.require(:note).permit(:content, :visibile_to)
+    params.require(:note).permit(:content, :visible_to)
   end
 
 end
