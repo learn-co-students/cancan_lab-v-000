@@ -3,6 +3,10 @@ class NotesController < ApplicationController
 
 
   def index
+    @notes = Note.none
+    if current_user
+     @notes = current_user.readable
+    end
   end
 
   def show
