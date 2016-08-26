@@ -22,7 +22,7 @@ RSpec.describe NotesController, type: :controller do
 
   describe 'post update' do
     it "can update your own notes" do
-      alice, beth = users(:alice), users(:beth)
+      beth, alice = users(:beth), users(:alice)
       session[:user_id] = beth.id
       
       content = 'oh so secret'
@@ -35,7 +35,7 @@ RSpec.describe NotesController, type: :controller do
       assert_redirected_to '/'
       note = Note.find(note_id)
       assert note.content == new_content
-      assert note.readers == [alice, beth]
+      assert note.readers == [beth, alice]
     end
   end
 end
