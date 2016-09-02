@@ -1,0 +1,11 @@
+<%= form_for @note do |f| %>
+  <%= f.label "Content:" %>
+  <%= f.text_field :content %><br>
+
+  <%= f.fields_for :readers do |reader_builder| %>
+    <%= reader_builder.label "Visible to:" %>
+    <%= reader_builder.text_field :name, placeholder: "Mary, Susie, Jane" %><br>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
