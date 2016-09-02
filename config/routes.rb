@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root 'sessions#new'
+  root 'notes#index'
 
   resources :notes
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:create]
+
+  post '/login', to: 'sessions#create'
+  post '/logout', to: 'sessions#destroy'
 end
