@@ -19,6 +19,7 @@ class Note < ActiveRecord::Base
   private
 
   def ensure_owner_can_read
+    # a whole lot of self here...
     if self.user && !self.readers.include?(self.user)
       self.readers << self.user
     end
