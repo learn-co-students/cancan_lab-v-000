@@ -4,11 +4,9 @@ class NotesController < ApplicationController
   end
 
   def show
-    @note = Note.find(id: params[:id])
   end
 
   def new
-    @note = Note.new
   end
 
   def create
