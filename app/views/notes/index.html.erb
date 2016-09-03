@@ -1,0 +1,15 @@
+<div class="page-header"><h1>Notes</h1></div>
+
+<% @notes.each do |note|%>
+<% if can? :read, note %>
+  <div class="well well-sm"></div>
+  <h2><%= note.content %></h2>
+  <% if can? :update, note %>
+    <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-info'%>
+  <%end%>
+
+  <% if can? :destroy, note %>
+    <%= link_to 'Delete', note_path(note), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} %>
+  <%end%>
+<%end%>
+<%end%>

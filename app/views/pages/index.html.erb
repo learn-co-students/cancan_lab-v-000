@@ -1,0 +1,4 @@
+<div class="page-header"><h1>Welcome!</h1></div>
+<% if can? :index, Note %>
+  <%= link_to 'notes', notes_path, class: 'btn btn-lg btn-primary'%>
+<%end%>
