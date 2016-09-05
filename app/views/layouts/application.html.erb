@@ -8,6 +8,21 @@
 </head>
 <body>
 
+<% if current_user %>
+  <%= form_tag('/logout', method: :post) do %>
+    <%= submit_tag 'sign out' %>
+  <% end %>
+<% end %>
+
+<% if !current_user %>
+  <%= form_tag('/login', method: :post) do %>
+    <%= text_field_tag 'name' %><br>
+    <%= submit_tag 'sign in' %>
+  <% end %>
+<% end %>
+
+<%= link_to "new note", '/notes/new' %>
+
 <%= yield %>
 
 </body>
