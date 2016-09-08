@@ -3,16 +3,22 @@ class Note < ActiveRecord::Base
   has_many :viewers
   has_many :readers, through: :viewers, source: :user
 
-  def visible_to=(names)
-    self.save
-    names.split(", ").each do |name|
-      user = User.find_or_create_by(name: name)
-      Viewer.create(user_id: user.id, note_id: self.id)
+  def visible_to
+    readers.map { |u| u.name }.join(', ')
+  end
+
+  def visible_to=(new_readers)
+    self.readers = new_readers.split(',').map do |name|
+      User.find_by(name: name.strip)
+    end.compact
+  end
+
+  private
+
+  def ensure_owner_can_read
+    if user && !readers.include?(user)
+      readers << user
     end
   end
 
-  def visible_to
-    users = []
-    # Viewer.all.where()
-  end
 end

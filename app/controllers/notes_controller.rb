@@ -1,5 +1,13 @@
 class NotesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource only: [:edit, :show, :update]
+
+  def index
+    @notes = Note.all
+    if current_user
+      @notes = current_reader.readable
+    end
+  end
+
 
   def new
     @note = Note.new
@@ -7,12 +15,20 @@ class NotesController < ApplicationController
 
   def create
     note = Note.create(note_params)
-    user = User.find(session[:user_id])
-    note.readers << user
-    note.user = user
-    note.save
+    note.user = current_user
+    binding.pry
+    note.readers << current_user
+    note.save!
     
-    redirect_to root_path
+    redirect_to '/'
+  end
+
+  def edit
+  end
+
+  def update
+    @note.update(note_params)
+    redirect_to '/'
   end
 
   def index
