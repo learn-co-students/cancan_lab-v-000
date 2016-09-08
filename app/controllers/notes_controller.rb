@@ -14,13 +14,13 @@ class NotesController < ApplicationController
   end
 
   def create
-    note = Note.create(note_params)
-    note.user = current_user
-    binding.pry
-    note.readers << current_user
-    note.save!
-    
-    redirect_to '/'
+    if logged_in?
+      note = Note.create(note_params)
+      note.user = current_user
+      note.readers << current_user
+      note.save!
+    end
+      redirect_to '/'
   end
 
   def edit
@@ -28,6 +28,8 @@ class NotesController < ApplicationController
 
   def update
     @note.update(note_params)
+    @note.readers = @note.readers.sort
+    # binding.pry
     redirect_to '/'
   end
 
