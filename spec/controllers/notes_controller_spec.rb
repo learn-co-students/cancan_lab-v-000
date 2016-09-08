@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.describe NotesController, type: :controller do
   fixtures :users
   describe 'post create' do
+    
     it "can't create a note if you're not logged in" do
       post :create, note: {content: 'hush', visible_to: ''}
       assert_redirected_to '/'
     end
+
     it "can create a note if you're logged in" do
       alice = users(:alice)
       content = 'secret message'
@@ -35,7 +37,7 @@ RSpec.describe NotesController, type: :controller do
       assert_redirected_to '/'
       note = Note.find(note_id)
       assert note.content == new_content
-      assert note.readers == [alice, beth]
+      assert note.readers.sort == [alice, beth]
     end
   end
 end
