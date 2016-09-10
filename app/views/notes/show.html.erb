@@ -1,0 +1,7 @@
+<h1>Notes#show</h1>
+<p>Find me in app/views/notes/show.html.erb</p>
+
+<%= @note.content %>
+<% @note.readers.each do |reader| %>
+	<%= reader.name %>
+<% end %>

@@ -1,0 +1,22 @@
+<h1>Create A New Note</h1>
+
+<%= form_for(@note) do |f| %>
+	<%= f.label "Content:" %>
+	<%= f.text_field :content %>
+
+	<br><br>
+
+	<%= f.label "Select an Existing Reader:" %>
+	<%= f.fields_for @note.readers.build do |reader| %>
+		<%= reader.check_box :name %>
+	<% end %>
+	
+	<br><br>
+
+	<%= f.label "Create New Reader:" %>
+	<%= f.text_field :user %>
+
+	<br><br>
+		
+	<%= f.submit %>
+<% end %>
