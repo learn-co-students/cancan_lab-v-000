@@ -1,7 +1,12 @@
-<h1>Notes#show</h1>
-<p>Find me in app/views/notes/show.html.erb</p>
-
 <%= @note.content %>
 <% @note.readers.each do |reader| %>
 	<%= reader.name %>
+<% end %>
+
+<% if can? :update, @note %>
+	<%= link_to "Edit", edit_note_path(@note) %>
+<% end %>
+
+<% if cannot? :update, @note %>
+	Editing disabled.
 <% end %>

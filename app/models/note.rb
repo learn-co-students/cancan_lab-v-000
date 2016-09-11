@@ -1,18 +1,26 @@
 class Note < ActiveRecord::Base
+	belongs_to :user
 	has_many :viewers
 	has_many :readers, through: :viewers, source: :user
 
-	accepts_nested_attributes_for :readers
+	  before_save :ensure_owner_can_read
+
 
 	def visible_to
-		notes.user
+		readers.map { |u| u.name }.join(', ')
 	end
 
-	def visible_to=(users)
-		if !users.blank?
-			users.each do |user|
-				notes.user << user
-			end
+	def visible_to=(new_readers)
+		self.readers = new_readers.split(",").map do |name|
+			User.find_by(:name => name)
 		end
 	end
+
+  private
+
+  def ensure_owner_can_read
+    if user && !readers.include?(user)
+      readers << user
+    end
+  end
 end
