@@ -7,13 +7,11 @@ class NotesController < ApplicationController
 
   def create
     note = Note.new(note_params)
-    if note.save
-      redirect_to :root
-    else
-      render new
-    end
+    note.user = current_user
+    note.save!
+    redirect_to '/'
   end
- 
+
   def index
   end
 
@@ -22,14 +20,13 @@ class NotesController < ApplicationController
   end
 
   def update
-    @note = Note.find_by(params[:id])
     @note.update(note_params)
-    redirect_to :root
+    redirect_to '/'
   end
 
   private
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :visible_to)
   end
 end
