@@ -33,7 +33,7 @@ class NotesController < ApplicationController
   def update
     if session.include? :user_id
       @note.update(note_params)
-      binding.pry
+      # binding.pry
       redirect_to root_path
     else
       redirect_to root_path

@@ -9,12 +9,12 @@ class Note < ActiveRecord::Base
       reader = User.find_or_create_by(name: reader_name)
       # binding.pry
     	self.readers << reader
-      binding.pry
+      # binding.pry
     end
   end
 
   def visible_to
-    binding.pry
+    # binding.pry
     self.readers.map { |reader| reader.name }.join(", ")
   end
 end
