@@ -3,12 +3,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if params[:name] && params[:name] != ""
-      session[:name] = params[:name]
-      redirect_to root_path
-    else
-      redirect_to sessions_new_path
+    @user = User.find_by(name: params[:user][:name])
+    if @user
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    # else
+    #   redirect_to new_session_path
     end
+
   end
 
   def destroy
