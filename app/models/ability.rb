@@ -8,4 +8,5 @@ class Ability
       note.readers.include? user
     end
   end
+  
 end
