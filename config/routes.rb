@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :notes
+
+  resources :notes
+  resources :users, only: [:create]
+
+  root 'sessions#root'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
