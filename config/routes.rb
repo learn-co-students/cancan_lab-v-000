@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :notes
+  #devise_for :notes
 
   resources :notes
   resources :users, only: [:create]
