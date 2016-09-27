@@ -8,6 +8,7 @@
 /.bundle
 config/secrets.yml
 config/secrets_bk.yml
+help_tips.rb
 
 
 # Ignore the default SQLite database.

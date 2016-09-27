@@ -2,14 +2,18 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    return unless user
-    can :manage, Note, {user_id: user.id}
-    can :read, Note do |note|
-      note.readers.include? user
+    # return unless user
+    user ||= User.new
+    if user
+      can :manage, Note, {user_id: user.id}
+      can :read, Note do |note|
+        note.readers.include? user
+      end
     end
   end
 end
 
+#This is the block that gave the 2 errors
     # return unless user
     # if user?
     #   can :manage, :all
