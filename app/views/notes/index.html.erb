@@ -1,1 +1,14 @@
 <h1>Welcome!</h1>
+
+
+<% @notes.each do |note| %>
+
+  <tr>
+    <td><%= link_to note.content, :action => 'show', :id => note.id %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => note.id %></td>
+    <td><%= link_to 'Destroy', {:action => 'destroy', :id => note.id}, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+
+
+<%= link_to 'New note', :action => 'new' %>

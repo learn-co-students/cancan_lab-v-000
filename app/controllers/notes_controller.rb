@@ -1,7 +1,8 @@
 class NotesController < ApplicationController
+  # load_and_authorize_resource
 
   def index
-    
+    @notes = Note.all
   end
 
   def new
@@ -9,19 +10,34 @@ class NotesController < ApplicationController
 
 
   def create
-    note = Note.new(params)
-    note.save
+    if session[:user_id]
+      user = User.find_by(session[:user_id])
+      note = Note.new(params)
+      note.user = current_user
+      user.notes.build(note_params)
+      note.save
+      redirect_to '/'
+    else
+      redirect_to '/'
+    end
   end
+
+    def update
+      if session[:user_id]
+        user = User.find(session[:user_id])
+        note = Note.find(params[:id])
+        note.user = current_user
+        note.update(note_params)
+      end
+        redirect_to '/'
+    end
 
   def edit
   end
 
-  def update
-    note = Note.find_by(:id)
-  end
 
   def show
-    @notes = Note.all
+    # @notes = Note.all
   end
 
   def destroy
@@ -30,7 +46,8 @@ class NotesController < ApplicationController
 
   private
 
-  # def
-    # .required
+  def note_params
+    params.require(:note).permit(:content, :visible_to)
+  end
 
 end
