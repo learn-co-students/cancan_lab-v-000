@@ -5,14 +5,14 @@ class Note < ActiveRecord::Base
 
 	before_save :owner_can_read
 
-	def visible_to=(names)
-		self.readers = names.split(",").map do |name|
-			User.find_by(name: name)
-		end
-	end
-
 	def visible_to
 		readers.map { |u| u.name }.join(', ')
+	end
+
+	def visible_to=(names)
+		self.readers = names.split(",").map do |name|
+			User.find_by(name: name.strip)
+		end
 	end
 
 	private
