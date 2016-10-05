@@ -1,4 +1,25 @@
 Rails.application.routes.draw do
+  get 'notes' => 'notes#index'
+
+  get 'notes/show'
+
+  get 'notes/new'
+
+  post 'notes/create'
+
+  get 'notes/edit'
+
+  post 'notes/update'
+
+  get 'notes/destroy'
+
+  get '/login' => 'sessions#new'
+
+  post '/login' => 'sessions#create'
+
+  post '/logout' => 'sessions#destroy'
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
