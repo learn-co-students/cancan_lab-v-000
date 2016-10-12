@@ -7,7 +7,6 @@ class Note < ActiveRecord::Base
 
 	def visible_to=(readers_list)
 		if !readers_list.empty?
-			puts "not empty"
 			readers_array = readers_list.split(', ').reject {|name| name.empty?}
 			readers_array.each do |reader|
 				user = User.find_by(:name => reader)

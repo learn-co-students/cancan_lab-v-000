@@ -1,32 +1,29 @@
 class NotesController < ApplicationController
-  def current_user
-    if session[:user_id]
-      @current_user = User.find(session[:user_id])
-    end
-  end
+  load_and_authorize_resource only: [:edit, :show, :update]
+  
 
-  load_and_authorize_resource
   def new
     @note = Note.new
   end
 
-  def create
-    if current_user
-      @note = Note.create[note_params]
-      @note.user = current_user
-    else
-      redirect_to '/'
-    end
+
+    def create
+    note = Note.new(note_params)
+    note.save!
+    redirect_to '/'
   end
 
   def show
-  end
+    end
 
   def edit
+
   end
 
   def update
-    @note = Note.find(params[:id])
+    note.update(note_params)
+    note.save!
+    redirect_to '/'
   end
 
   def delete
