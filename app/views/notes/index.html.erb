@@ -1,0 +1,17 @@
+<h1>These are your top secret notes, <%=@user.name%></h1>
+
+<%@notes.each do |note|%>
+  <%if note.readers.include?(@user)%>
+      <h3>Content: <%=note.content%></h3>
+      <h3>Author: <%=note.note_author.name%></h3>
+      <%=link_to("edit", edit_note_path(note)) %>
+      <br>
+      <br>
+      <%end%>
+    <%end%>
+
+
+<h2><%=link_to("Create a new note.", new_note_path)%></h2>
+
+
+<%=link_to("log out", user_path(@user), method: :delete) %>
