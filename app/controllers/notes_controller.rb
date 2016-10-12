@@ -10,7 +10,7 @@ class NotesController < ApplicationController
     def create
     note = Note.new(note_params)
     note.user = current_user
-    note.readers << current_user
+
     note.save!
     redirect_to '/'
   end
@@ -23,8 +23,8 @@ class NotesController < ApplicationController
   end
 
   def update
-    note.update(note_params)
-    note.save!
+    @note.update(note_params)
+    @note.save!
     redirect_to '/'
   end
 

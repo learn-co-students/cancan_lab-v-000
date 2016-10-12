@@ -4,19 +4,25 @@ class Note < ActiveRecord::Base
 	has_many :readers, through: :viewers, source: :user
 
 	accepts_nested_attributes_for :readers
+before_save :ensure_owner_can_read
+  
+  def visible_to
+    readers.map { |u| u.name }.join(', ')
+  end
 
-	def visible_to=(readers_list)
-		if !readers_list.empty?
-			readers_array = readers_list.split(', ').reject {|name| name.empty?}
-			readers_array.each do |reader|
-				user = User.find_by(:name => reader)
-				self.readers << user
-			end
-		end
-	end
+  def visible_to=(new_readers)
+    self.readers = new_readers.split(',').map do |name|
+      User.find_by(name: name.strip)
+    end.compact
+  end
 
-	def visible_to
-		names = self.readers.collect{|reader| reader.name}
-		names.join(", ")
-	end
+  private
+
+  def ensure_owner_can_read
+    if user && !readers.include?(user)
+      readers << user
+    end
+  end
+
+
 end
