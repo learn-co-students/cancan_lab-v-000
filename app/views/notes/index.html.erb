@@ -1,0 +1,20 @@
+<h1>Notes index page</h1>
+
+<% if current_user %>
+  <p>Hi, <%= current_user.name %>.</p>
+  
+  <%= link_to "new note", new_note_path %>
+  <br><br>
+  <%= form_tag ({controller: 'sessions', action: 'destroy', method: :post}) do %>
+    <input type="submit" value="logout">
+  <% end %>
+
+  <h2>Notes</h2>
+  <%= render @notes %>
+
+<% else %>
+  <%= form_tag ({controller: 'sessions', action: 'create', method: :post}) do %>
+    <input name=name placeholder='sign in'>
+    <input type="submit" value="sign in">
+  <% end %>
+<% end %>
