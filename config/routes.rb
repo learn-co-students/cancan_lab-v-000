@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :users, :only => [:create]
   resources :notes
 
+  post '/login' => 'sessions#create'
+  post '/logout' => 'sessions#destroy'
+
 
 
 end
