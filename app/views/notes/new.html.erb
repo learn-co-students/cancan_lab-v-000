@@ -1,0 +1,9 @@
+<%= form_for @note do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.collection_check_boxes :visible_to, User.all, :id, :name, include_blank: true %>
+
+
+  <%= f.submit %>
+<% end %>
