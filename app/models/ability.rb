@@ -2,14 +2,14 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    # Guests can't do anything.
     return unless user
+
+    can :manage, Note, {user_id: user.id}
     
-    can :manage, Note, user_id: user.id
-
     can :read, Note do |note|
-        note.readers.include? user
+      note.readers.include? user
     end
-
   end
 
     # Define abilities for the passed in user here. For example:

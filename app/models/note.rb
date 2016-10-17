@@ -1,24 +1,19 @@
 class Note < ActiveRecord::Base
-  has_many :viewers
-  has_many :readers, through: :viewers, source: :user
   belongs_to :user
+  has_many :viewers  
+  has_many :readers, through: :viewers, source: :user
 
   before_save :ensure_owner_can_read
-  def visible_to 
-    # visible_to returns reader names as a comma-separated string
-   readers.map do |reader|
-      reader.name
-    end.join(', ')
+  
+  def visible_to
+    readers.map { |u| u.name }.join(', ')
   end
 
-  def visible_to=(user_list)
-    #takes a comma separated list of names, trims spaces, and makes those users readers
-    self.readers = user_list.split(',').collect do |username|
-      User.find_by(name: username.strip)
+  def visible_to=(new_readers)
+    self.readers = new_readers.split(',').map do |name|
+      User.find_by(name: name.strip)
     end.compact
-    
   end
-
 
   private
 
@@ -27,5 +22,4 @@ class Note < ActiveRecord::Base
       readers << user
     end
   end
-
 end
