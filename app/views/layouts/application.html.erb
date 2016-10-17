@@ -8,6 +8,15 @@
 </head>
 <body>
 
+  <% if @current_user %>
+    <p>You're logged in.</p>
+    <%= form_tag controller: 'sessions', action: 'destroy', method: 'delete' do %>
+      <%= submit_tag "Logout" %>
+    <% end %>
+  <% end %>
+
+
+
 <%= yield %>
 
 </body>

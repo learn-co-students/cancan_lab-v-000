@@ -1,0 +1,10 @@
+<p><%= @note.content %> </p>
+
+<%= form_for(@note, action: "update", method: "patch") do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit %>
+<% end %>
+
+<%= form_for(@note, action: "destroy", method: "delete") do |f| %>
+  <%= f.submit "Delete" %>
+<% end %>
