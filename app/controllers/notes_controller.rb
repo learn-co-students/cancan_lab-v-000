@@ -5,6 +5,7 @@ class NotesController < ApplicationController
     if current_user
       note = Note.new(note_params)
       note.readers << current_user
+      note.user = current_user
       note.save
     end
     redirect_to '/'
@@ -12,7 +13,7 @@ class NotesController < ApplicationController
 
   def update
     note = Note.find(params[:id])
-    note.update(params[:note])
+    note.update(note_params)
     redirect_to '/'
   end
 
