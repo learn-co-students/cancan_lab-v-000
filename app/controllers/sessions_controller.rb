@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
 
   def create
-    session[:user_id] = User.find_or_create_by(name: params[:name])
-      redirect_to controller: 'application', action: 'application'
+    return head(:unprocessable) unless params[:name]
+    session[:user_id] = User.find_or_create_by(name: params[:name]).id
+      redirect_to controller: 'application', action: 'index'
     end
   end
 

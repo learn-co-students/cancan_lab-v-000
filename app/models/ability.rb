@@ -1,6 +1,14 @@
 class Ability
   include CanCan::Ability
   def initialize(user)
+   # Guests can't do anything.
+
+   can :manage, Note, {user_id: user.id}
+
+   can :read, Note do |note|
+     note.readers.include? user
+   end
+
     # Define abilities for the passed in user here. For example:
     #
       # user ||= User.new # guest user (not logged in)
@@ -9,14 +17,6 @@ class Ability
       # else
       #   can :read, :all
       # end
-
-    can :read, Note do |note|
-       note.user_id == user.id
-    end
-
-    can :update, Note do |note|
-       note.user_id == user.id
-    end
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

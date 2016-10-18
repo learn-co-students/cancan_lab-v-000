@@ -5,16 +5,12 @@ class Note < ActiveRecord::Base
 
 
   def visible_to
-    self.readers.map do |reader|
-      reader.name.join(", ")
-    end
+    readers.map { |u| u.name }.join(', ')
   end
 
-  def visible_to=(name)
-    visible = self.readers.map do |reader|
-      reader = User.find_or_create_by(name: name).split(", ")
-      
-    end
+  def visible_to=(appoint_reader)
+    self.readers = appoint_reader.split(',').map do |name|
+      User.find_by(name: name.strip)
+    end.compact
   end
-
 end

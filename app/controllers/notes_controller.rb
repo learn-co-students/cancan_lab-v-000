@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  load_and_authorize_resource only: [:edit, :show, :update]
   def index
   end
 
@@ -12,15 +13,25 @@ class NotesController < ApplicationController
   end
 
   def create
+     note = Note.new(note_params)
+     note.user = current_user
+     note.save!
+     redirect_to '/'
+   end
 
-      note = Note.new(note_params) if require_login
-      if !note.nil?
-        note.save
-        redirect_to '/'
-      else
-        redirect_to controller: 'notes', action: 'index'
-      end
-  end
+
+  # def create
+  #   user = User.find([:id])
+  #   if session[:user_id] == user.id
+  #     note = Note.new(note_params)
+  #   end
+  #   if !note.nil?
+  #     note.save
+  #     redirect_to '/'
+  #   else
+  #     redirect_to controller: 'notes', action: 'index'
+  #   end
+  # end
 
 
   def edit
@@ -37,7 +48,7 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:content, visible_to:[])
+    params.require(:note).permit(:content, visible_to:[:name])
   end
 
 end
