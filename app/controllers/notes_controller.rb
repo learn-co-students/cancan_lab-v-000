@@ -4,19 +4,24 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
-    @note.viewers.build
+    # @note.viewers.build
   end
 
   def show
+    @note = Note.find(params[:id])
   end
 
   def create
-    note = Note.new(note_params)
-    if note.save
-      redirect_to '/'
-    end
 
+      note = Note.new(note_params) if require_login
+      if !note.nil?
+        note.save
+        redirect_to '/'
+      else
+        redirect_to controller: 'notes', action: 'index'
+      end
   end
+
 
   def edit
 
