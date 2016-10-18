@@ -1,54 +1,39 @@
+
 class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :show, :update]
-  def index
-  end
 
   def new
-    @note = Note.new
-    # @note.viewers.build
-  end
-
-  def show
-    @note = Note.find(params[:id])
+    render partial: 'form', locals: {note: Note.new}
   end
 
   def create
-     note = Note.new(note_params)
-     note.user = current_user
-     note.save!
-     redirect_to '/'
-   end
-
-
-  # def create
-  #   user = User.find([:id])
-  #   if session[:user_id] == user.id
-  #     note = Note.new(note_params)
-  #   end
-  #   if !note.nil?
-  #     note.save
-  #     redirect_to '/'
-  #   else
-  #     redirect_to controller: 'notes', action: 'index'
-  #   end
-  # end
-
-
-  def edit
-
+    note = Note.new(note_params)
+    note.user = current_user
+    note.save!
+    redirect_to '/'
   end
 
   def update
-
+    @note.update(note_params)
+    redirect_to '/'
   end
 
-  def destroy
-
+  def edit
   end
+
+  def show
+  end
+
+  def index
+    @notes = Note.none
+    if current_user
+      @notes = current_user.readable
+    end
+  end
+
   private
 
   def note_params
-    params.require(:note).permit(:content, visible_to:[:name])
+    params.require(:note).permit(:content, :visible_to)
   end
-
 end
