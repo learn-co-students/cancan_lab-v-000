@@ -13,6 +13,7 @@ class Note < ActiveRecord::Base
   def visible_to=(name)
     visible = self.readers.map do |reader|
       reader = User.find_or_create_by(name: name).split(", ")
+      
     end
   end
 
