@@ -1,4 +1,3 @@
-
 class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :show, :update]
 
@@ -24,11 +23,10 @@ class NotesController < ApplicationController
   def show
   end
 
+
   def index
-    @notes = Note.none
-    if current_user
-      @notes = current_user.readable
-    end
+
+    
   end
 
   private
