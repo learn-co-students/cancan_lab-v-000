@@ -2,6 +2,14 @@ class NotesController < ApplicationController
 
 	include SessionsHelper
 
+	# load_and_authorize_resource
+
+	rescue_from CanCan::AccessDenied do |exception|
+		redirect_to root_url, :alert => exception.message
+	end
+
+
+
 	def new
 
 	end
@@ -22,12 +30,15 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
-		Note.find(params[:id]).delete
+		@note = Note.find(params[:id])
+		authorize! :update, @note
+		@note.delete
 	end
 
 	def update
 		@note = Note.find(params[:id])
-		if @note.user == current_user && @note.update(note_params)
+		authorize! :update, @note
+		if @note.update(note_params)
 			redirect_to root_path
 		else
 			redirect_to root_path
