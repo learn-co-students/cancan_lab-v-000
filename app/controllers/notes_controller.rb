@@ -1,35 +1,35 @@
 class NotesController < ApplicationController
-
-  def index
-    @notes = Note.all
-  end
-
-  def show
-    @note = Note.find_by(params[:id])
-  end
+  load_and_authorize_resource only: [:edit, :show, :update]
 
   def new
-    @note = Note.new
+    render partial: 'form', locals: {note: Note.new}
   end
 
   def create
-    @note = Note.create(note_params)
-    redirect_to note_path(@note)
-  end
-
-  def edit
-    @note = Note.find_by(params[:id])
+    note = Note.new(note_params)
+    note.user = current_user
+    note.save!
+    redirect_to '/'
   end
 
   def update
-    @note = Note.find_by(params[:id])
     @note.update(note_params)
-    redirect_to note_path(@note)
+    redirect_to '/'
+  end
+
+  def edit
+  end
+
+  def show
+  end
+
+
+  def index
   end
 
   private
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :visible_to)
   end
 end
