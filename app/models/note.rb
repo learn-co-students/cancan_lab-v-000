@@ -8,14 +8,14 @@ class Note < ActiveRecord::Base
     self.readers.each do |reader|
       readers << reader.name
     end
-    readers.join(", ")
+    readers.uniq.join(", ")
   end
 
   def visible_to=(users)
     users = users.split(", ")
     users.each do |user|
       u = User.find_or_create_by(name: user)
-      self.readers << u
+      self.readers << u if !self.readers.exists?(u.id)
     end
   end
 end
