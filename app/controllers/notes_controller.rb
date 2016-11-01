@@ -1,7 +1,9 @@
 class NotesController < ApplicationController
 
+  load_and_authorize_resource only: [:edit, :show, :update]
+
   def index
-    @notes = Note.all
+    @notes = current_user.readable.all
     render :index
   end
 
@@ -34,13 +36,8 @@ class NotesController < ApplicationController
   end
 
   def update
-    @note = Note.find(params[:id])
-    if @note.user == current_user
-      @note.update(note_params)
-      redirect_to '/'
-    else
-      redirect_to '/'
-    end
+    @note.update(note_params)
+    redirect_to '/'
   end
 
   def destroy
