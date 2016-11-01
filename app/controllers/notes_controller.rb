@@ -25,7 +25,7 @@ class NotesController < ApplicationController
 
   def update
     @note.update(note_params)
-
+    @note.readers << current_user 
     redirect_to root_path
   end
 

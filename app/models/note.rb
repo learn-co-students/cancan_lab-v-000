@@ -8,9 +8,9 @@ class Note < ActiveRecord::Base
   end
 
   def visible_to=(new_readers)
-    new_readers.split(', ').each do |name|
-      self.readers << User.find_by(name: name.strip)
+    self.readers = new_readers.split(',').map do |name|
+        User.find_by(name: name.strip)
+      end
     end
-  end
 
 end
