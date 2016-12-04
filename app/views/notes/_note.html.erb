@@ -1,0 +1,15 @@
+<div class=note>
+  <div class=note-content>
+    <%= note.content %>
+  </div>
+  <div class=note-author>
+    Author: <%= note.user.name %><br>
+    Readers:
+    <% note.readers.each do |reader| %>
+      <%= reader.name %>
+    <% end %>
+  </div>
+  <% if can? :update, note %>
+    <%= link_to 'edit', edit_note_path(note) %>
+  <% end %>
+</div>
