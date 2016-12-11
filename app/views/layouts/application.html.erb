@@ -7,8 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= link_to "Login", login_path, method: :get %>
+  <%= link_to "Sign up", signup_path, method: :get %>
+  <%= link_to "Logout", logout_path, method: :post %><br></br>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
