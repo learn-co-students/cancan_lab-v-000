@@ -3,9 +3,9 @@
 <%= link_to 'New Note', new_note_path %>
 
 <ul>
-  <% @notes.each do |n| %>
+  <% @notes.each do |note| %>
     <li>
-      <%= note.creator %>
+      <%= note.user.name %>
       <p><%= note.content %></p>
     </li>
   <% end %>

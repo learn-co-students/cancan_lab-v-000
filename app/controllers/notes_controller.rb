@@ -1,12 +1,5 @@
 class NotesController < ApplicationController
-  def index
-    if logged_in?
-      @notes = current_user.readable
-      raise
-    else
-      redirect_to "/"
-    end
-  end
+  load_and_authorize_resource only: [:edit, :show, :update]
 
   def new
     if logged_in?
@@ -20,7 +13,6 @@ class NotesController < ApplicationController
     if logged_in?
       note = Note.new(get_params)
       note.user = current_user
-      note.readers << current_user
       note.save
       # redirect_to note_path(note)
       redirect_to "/"
@@ -49,7 +41,6 @@ class NotesController < ApplicationController
     note = Note.find(params[:id])
     if logged_in?
       note.update(get_params)
-      note.readers << current_user
       note.save
       # redirect_to note_path(note)
       redirect_to "/"
@@ -63,12 +54,17 @@ class NotesController < ApplicationController
     redirect_to notes_path
   end
 
+  def index
+    if logged_in?
+      @notes = current_user.readable
+    else
+      redirect_to "/"
+    end
+  end
+
   private
 
   def get_params
-    params.require(:note).permit(
-      :content,
-      :visible_to
-    )
+    params.require(:note).permit(:content, :visible_to)
   end
 end
