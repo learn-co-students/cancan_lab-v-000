@@ -1,0 +1,9 @@
+<h1>Welcome <%= current_user.name.capitalize %></h1>
+<%= link_to 'Logout', logout_path, :method => :delete %>
+
+<h2>Here are all the notes</h2>
+<ul>
+  <% @notes.each do |note|%>
+    <li><%=note.content%></li>
+  <% end %>
+</ul>
