@@ -10,13 +10,9 @@ class NotesController < ApplicationController
   end
 
   def create
-    # raise params.inspect
-    @note = Note.new(note_params)
-    if @note.save
-      redirect_to notes_path
-    else
-      render :new
-    end
+    # raise current_user.inspect
+    @note = Note.create(note_params)
+    redirect_to root_path
   end
 
   private

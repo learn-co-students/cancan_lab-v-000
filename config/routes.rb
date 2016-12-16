@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   root to: 'notes#index'
-  get '/login' => "sessions#new"
-  post '/login' => "sessions#create"
+  post '/', to: 'sessions#create'
+  # get '/login' => "sessions#new"
+  # post '/login' => "sessions#create"
   delete 'logout', to: "sessions#destroy"
   resources :notes
   resources :users, only: [:new, :create]
