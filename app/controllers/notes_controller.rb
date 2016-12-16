@@ -13,9 +13,9 @@ class NotesController < ApplicationController
     # raise params.inspect
     @note = Note.new(note_params)
     if @note.save
-      redirect_to root_path
+      redirect_to notes_path
     else
-      render root_path
+      render :new
     end
   end
 
