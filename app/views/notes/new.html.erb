@@ -1,0 +1,12 @@
+<h1>Create a new note:</h1>
+
+<% if session[:user_id] %>
+	<%= form_for @note do |f| %>
+		<%= f.label :content %>
+		<%= f.text_field :content %>
+		<br>
+		<%= f.submit "Create Note" %>
+	<% end %>
+<% else %>
+<p>Sorry you need to <%= link_to"log in", login_path %> to be able to submit a note.</p>	
+<% end %>
