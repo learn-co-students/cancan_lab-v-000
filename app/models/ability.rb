@@ -2,6 +2,18 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
+    return unless user
+    # can :create, Note
+    # can :update, Note
+    can :read, Note do |note|
+      note.readers.include?(user)
+    end
+
+    # can :update, Note do |note|
+    #   note.user == user
+    # end
+    can :manage, Note, {user_id: user.id}
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

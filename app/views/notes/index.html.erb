@@ -1,22 +1,7 @@
-<% if current_user %>
+<h2>Here are all the notes</h2>
 
-  <h1>Welcome <%= current_user.name.capitalize %></h1>
-  <%= link_to 'Logout', logout_path, :method => :delete %>
-
-  <h2>Here are all the notes</h2>
-  <ul>
-    <% @notes.each do |note|%>
-      <li><%=note.content%></li>
-    <% end %>
-  </ul>
-
-<% else %>
-
-  <h1>Login</h1>
-
-  <%= form_for :user, :url => "/" do |f| %>
-    Username: <%= f.text_field :name %>
-    <%= f.submit "Login" %>
+<ul>
+  <% @notes.each do |note|%>
+    <li><%=note.content%></li>
   <% end %>
-
-<% end %>
+</ul>

@@ -1,23 +1,13 @@
 class SessionsController < ApplicationController
 
-  def new
-  end
-
   def create
-    # raise params.inspect
-    # if
-      user = User.find_by(name: params[:user][:name])
-      @user = user
-      session[:user_id] = @user.id
-      redirect_to root_path
-    # else
-    #   render :new
-    # end
+    session[:user_id] = User.find_or_create_by(name: params[:user][:name]).id
+    redirect_to root_path
   end
 
   def destroy
     session.delete(:user_id)
-    redirect_to "/"
+    redirect_to :back
   end
 
 end
