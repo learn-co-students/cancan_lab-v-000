@@ -1,0 +1,8 @@
+here will display new note
+
+
+<%= form_for @note, url: {action: "create"} do |f| %>
+  <%= f.label :content  %>
+  <%= f.text_field :content  %>
+  <%= f.submit "Create"  %>
+<% end %>
