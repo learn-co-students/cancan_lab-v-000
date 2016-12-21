@@ -1,0 +1,8 @@
+here will display new note
+
+
+<%= form_for @user, url: {action: "create"} do |f| %>
+  <%= f.label :name  %>
+  <%= f.text_field :name  %>
+  <%= f.submit "Sign up"  %>
+<% end %>
