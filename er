@@ -1,0 +1,33 @@
+
+[1mFrom:[0m /home/bob/code/cancan_lab-v-000/app/models/ability.rb @ line 5 Ability#initialize:
+
+     [1;34m4[0m: [32mdef[0m [1;34minitialize[0m(user)
+ =>  [1;34m5[0m:   binding.pry
+     [1;34m6[0m:   [1;34m# Define abilities for the passed in user here. For example:[0m
+     [1;34m7[0m:   [1;34m#[0m
+     [1;34m8[0m:   [1;34m#   user ||= User.new # guest user (not logged in)[0m
+     [1;34m9[0m:   [1;34m#   if user.admin?[0m
+    [1;34m10[0m:   [1;34m#     can :manage, :all[0m
+    [1;34m11[0m:   [1;34m#   else[0m
+    [1;34m12[0m:   [1;34m#     can :read, :all[0m
+    [1;34m13[0m:   [1;34m#   end[0m
+    [1;34m14[0m:   [1;34m#[0m
+    [1;34m15[0m:   [1;34m# The first argument to `can` is the action you are giving the user[0m
+    [1;34m16[0m:   [1;34m# permission to do.[0m
+    [1;34m17[0m:   [1;34m# If you pass :manage it will apply to every action. Other common actions[0m
+    [1;34m18[0m:   [1;34m# here are :read, :create, :update and :destroy.[0m
+    [1;34m19[0m:   [1;34m#[0m
+    [1;34m20[0m:   [1;34m# The second argument is the resource the user can perform the action on.[0m
+    [1;34m21[0m:   [1;34m# If you pass :all it will apply to every resource. Otherwise pass a Ruby[0m
+    [1;34m22[0m:   [1;34m# class of the resource.[0m
+    [1;34m23[0m:   [1;34m#[0m
+    [1;34m24[0m:   [1;34m# The third argument is an optional hash of conditions to further filter the[0m
+    [1;34m25[0m:   [1;34m# objects.[0m
+    [1;34m26[0m:   [1;34m# For example, here the user can only update published articles.[0m
+    [1;34m27[0m:   [1;34m#[0m
+    [1;34m28[0m:   [1;34m#   can :update, Article, :published => true[0m
+    [1;34m29[0m:   [1;34m#[0m
+    [1;34m30[0m:   [1;34m# See the wiki for details:[0m
+    [1;34m31[0m:   [1;34m# https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities[0m
+    [1;34m32[0m: [32mend[0m
+
