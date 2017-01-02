@@ -1,12 +1,22 @@
 class NotesController < ApplicationController
   load_and_authorize_resource except: :create
 
+  def new
+
+  end
+
   def create
     @note = Note.new(params_check)
     @note.user = current_user
-    @note.save
+    @note.save!
     redirect_to root_path
-    #raise @note.inspect
+  end
+
+  def update
+    @notee = Note.find(params[:id])
+  @notee.update(params_check)
+  @notee.save
+  redirect_to root_path
   end
 
   private
