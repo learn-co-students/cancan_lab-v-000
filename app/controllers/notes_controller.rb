@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
 
-	  load_and_authorize_resource only: [:show]
+	  load_and_authorize_resource only: [:show, :edit, :update]
 
   
   def show
@@ -10,14 +10,16 @@ class NotesController < ApplicationController
   end
 
   def new
+    @note = Note.new
   end
 
 
   def create
     if logged_in?
-      @note = Note.create(note_params)
-      @note.readers << current_user
-      @note.save
+      note = Note.new(note_params)
+      note.user = current_user
+      note.readers << current_user
+      note.save!
       redirect_to root_path
     else
       redirect_to root_path
@@ -31,8 +33,7 @@ class NotesController < ApplicationController
     note = Note.find_by(id: params[:id])
     if logged_in?
       
-      note.update(note_params)
-      note.readers << current_user if !note.readers.include?(current_user)
+      note.update(note_params) if note.user == current_user
       note.save
 
       redirect_to root_path
