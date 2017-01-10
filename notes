@@ -1,0 +1,54 @@
+notes
+
+need accepts nested attributes.  don't really remember how to use that.  i made a methods to create the attributes.  should i just be calling those?  i feel like rails can do that automatically when i use strong params
+
+
+questions
+I don't understand this join and having an entry in Viewers to be able to view the note.  Doesn't seem to be the way cancan is setup from the railscast i saw.
+
+why does a note have a user_id and users, through viewers.   does that cause issues?  Note is created by a user and has many viewers i suppose.
+
+issues
+there is a test folder with specs in it also
+running rspec says "minitest assertion for ability spec"
+
+it would be nice to have basic lab for this before having to jump through a join table, accepts nested attributes.
+
+
+
+########## minitest instead of rspec ######
+Failures:
+
+  1) Ability users can :read their own posts
+     Failure/Error: assert abilities[name].can? :read, private_notes[name]
+     Minitest::Assertion:
+       Failed assertion, no message given.
+     # /Users/Corey/.rvm/gems/ruby-2.2.1/gems/minitest-5.8.3/lib/minitest/assertions.rb:129:in `assert'
+     # ./spec/models/ability_spec.rb:31:in `block (4 levels) in <top (required)>'
+     # ./spec/models/ability_spec.rb:30:in `each'
+     # ./spec/models/ability_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  2) Ability users can :read posts they're viewers of
+     Failure/Error: assert abilities[:beth].can? :read, alice_to_beth
+     Minitest::Assertion:
+       Failed assertion, no message given.
+     # /Users/Corey/.rvm/gems/ruby-2.2.1/gems/minitest-5.8.3/lib/minitest/assertions.rb:129:in `assert'
+     # ./spec/models/ability_spec.rb:40:in `block (3 levels) in <top (required)>'
+
+  3) Ability users can :update their own notes
+     Failure/Error: assert abilities[name].can? :update, private_notes[name]
+     Minitest::Assertion:
+       Failed assertion, no message given.
+     # /Users/Corey/.rvm/gems/ruby-2.2.1/gems/minitest-5.8.3/lib/minitest/assertions.rb:129:in `assert'
+     # ./spec/models/ability_spec.rb:46:in `block (4 levels) in <top (required)>'
+     # ./spec/models/ability_spec.rb:45:in `each'
+     # ./spec/models/ability_spec.rb:45:in `block (3 levels) in <top (required)>'
+
+Finished in 3 minutes 41.1 seconds (files took 2.39 seconds to load)
+5 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/models/ability_spec.rb:29 # Ability users can :read their own posts
+rspec ./spec/models/ability_spec.rb:39 # Ability users can :read posts they're viewers of
+rspec ./spec/models/ability_spec.rb:44 # Ability users can :update their own notes
