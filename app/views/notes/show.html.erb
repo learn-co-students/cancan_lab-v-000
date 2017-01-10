@@ -1,0 +1,12 @@
+<div class=note>
+  <div class=note-content>
+    <%= @note.content %>
+  </div>
+  <div class=note-author>
+    <%= @note.user.name %>
+  </div>
+
+  <%@note.readers.each do |reader|%>
+  <%= reader.name%>
+  <% end %>
+</div>
