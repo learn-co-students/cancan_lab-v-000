@@ -1,3 +1,4 @@
 <h2>Hi, <%= session[:name] %>!</h2>
 <h3>Notes:</h3><br>
-<%= @notes.size %><br></br>
+<p>note count:</p><%= @notes.size %><br></br>
+<%= link_to "create note", new_note_path %>

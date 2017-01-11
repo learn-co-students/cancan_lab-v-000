@@ -29,8 +29,12 @@ class NotesController < ApplicationController
   end
 
   def update
-    @note.update(note_params)
-    redirect_to root_path
+    if current_user
+      @note.update(note_params)
+      redirect_to note_path(@note)
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy

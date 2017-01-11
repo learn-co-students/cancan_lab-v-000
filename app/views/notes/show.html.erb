@@ -4,3 +4,8 @@
 <h2>author:</h2><%= @user.name %>
 <br></br>
 <h2>content:</h2><%= @note.content %><br></br>
+
+
+<%= link_to "edit note", edit_note_path(@note) %>
+
+<%= link_to "homepage", root_path %>
