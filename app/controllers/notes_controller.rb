@@ -4,12 +4,7 @@ class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :update, :show, :destroy]
 
   def index
-    if !logged_in?
-      redirect_to login_path
-    else
       @notes = Note.all
-      binding.pry
-    end
   end
 
   def new
