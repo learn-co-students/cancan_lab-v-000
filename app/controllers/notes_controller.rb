@@ -10,6 +10,7 @@ class NotesController < ApplicationController
   end
 
   def create
+    binding.pry
   end
 
   def show
