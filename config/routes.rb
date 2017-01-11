@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :notes
+  resources :notes, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :users, only: [:create]
+
   root 'notes#index'
 
   post '/login' => 'sessions#create'

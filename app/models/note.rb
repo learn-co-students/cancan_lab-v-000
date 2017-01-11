@@ -13,7 +13,7 @@ class Note < ActiveRecord::Base
   def visible_to=(note)
     x = note.split(', ')
     x.each do |user|
-      readers << User.find_by(name: user)
+      readers << User.find_or_create_by(name: user)
     end
   end
 
