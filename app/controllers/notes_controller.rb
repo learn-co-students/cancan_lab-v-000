@@ -1,10 +1,9 @@
-require 'pry'
-
 class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :update, :show, :destroy]
+  before_action :current_user
 
   def index
-      @notes = Note.all
+    @notes = Note.all
   end
 
   def new
@@ -14,6 +13,7 @@ class NotesController < ApplicationController
   def create
     if current_user
       @note = Note.new(note_params)
+      @note.user = current_user
       @note.save
     end
     redirect_to root_path
