@@ -9,7 +9,6 @@ class Ability
       alias_action :create, :read, :update, :destroy, to: :crud
 
       can :read, Note do |note|
-        binding.pry
         note.readers.include(user)
       end
 
