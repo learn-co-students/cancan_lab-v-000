@@ -1,0 +1,6 @@
+<h2>readers:</h2><% @note.visible_to.split(", ").each do |r| %>
+  <%= r %><br>
+<% end %></br>
+<h2>author:</h2><%= @user.name %>
+<br></br>
+<h2>content:</h2><%= @note.content %><br></br>

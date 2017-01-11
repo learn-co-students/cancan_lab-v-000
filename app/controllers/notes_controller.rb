@@ -15,12 +15,14 @@ class NotesController < ApplicationController
       @note = Note.new(note_params)
       @note.user = current_user
       @note.save
+      redirect_to note_path(@note)
+    else
+      redirect_to root_path
     end
-    redirect_to root_path
   end
 
   def show
-
+    @user = User.find_by(id: @note.user_id)
   end
 
   def edit
