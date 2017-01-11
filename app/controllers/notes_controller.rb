@@ -2,10 +2,14 @@ require 'pry'
 
 class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :update, :show, :destroy]
-  before_action :current_user
 
   def index
-    binding.pry
+    if !logged_in?
+      redirect_to login_path
+    else
+      @notes = Note.all
+      binding.pry
+    end
   end
 
   def new
@@ -15,8 +19,6 @@ class NotesController < ApplicationController
   def create
     if current_user
       @note = Note.new(note_params)
-
-      @note.user_id = current_user.id
       @note.save
     end
     redirect_to root_path
