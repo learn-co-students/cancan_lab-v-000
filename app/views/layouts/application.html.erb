@@ -8,7 +8,14 @@
 </head>
 <body>
 
-<%= yield %>
+<% if session[:user_id] %>
+  <%= yield %>
+  <%= form_tag logout_path do %>
+    <%= submit_tag "logout" %>
+  <% end %>
+<% else %>
+  <%= render :template =>'sessions/new'%>
+<% end %>
 
 </body>
 </html>

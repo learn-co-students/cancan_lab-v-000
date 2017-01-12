@@ -1,0 +1,15 @@
+<h1>Hi, <%= @user.name %>!</h1>
+<% if !@notes.empty? %>
+  <h2>Notes:</h2><br>
+  <% @notes.each do |n| %>
+  <ul>
+    <li><%= n.content %>
+    <% if can? :read, n %>
+      <%= link_to "view note", note_path(n) %>
+    <% end %></li><br></br>
+  </ul>
+  <% end %>
+<% end %>
+<br></br>
+<%= link_to "create note", new_note_path %>
+<br></br>
