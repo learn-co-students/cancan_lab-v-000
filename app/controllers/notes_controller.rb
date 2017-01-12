@@ -3,7 +3,11 @@ class NotesController < ApplicationController
   before_action :current_user
 
   def index
-    @notes = Note.all
+    if current_user
+      @notes = current_user.readable
+    else
+      redirect_to login_path
+    end
   end
 
   def new
@@ -15,10 +19,8 @@ class NotesController < ApplicationController
       @note = Note.new(note_params)
       @note.user = current_user
       @note.save
-      redirect_to note_path(@note)
-    else
-      redirect_to root_path
     end
+      redirect_to root_path
   end
 
   def show
@@ -31,9 +33,9 @@ class NotesController < ApplicationController
   def update
     if current_user
       @note.update(note_params)
-      redirect_to note_path(@note)
-    else
       redirect_to root_path
+    else
+      redirect_to login_path
     end
   end
 

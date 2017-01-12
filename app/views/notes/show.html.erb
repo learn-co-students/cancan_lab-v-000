@@ -7,4 +7,6 @@
 
 
 <%= link_to "homepage", root_path %>
-<%= link_to "edit note", edit_note_path(@note) %>
+<% if can? :manage, @note %>
+  <%= link_to "edit note", edit_note_path(@note) %>
+<% end %>

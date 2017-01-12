@@ -8,18 +8,13 @@
 </head>
 <body>
 
-<% if session[:name] %>
+<% if session[:user_id] %>
   <%= yield %>
   <%= form_tag logout_path do %>
     <%= submit_tag "logout" %>
   <% end %>
 <% else %>
-  <%= form_tag('/login', method: :post, class: 'session-login') do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
-    <br>
-    <%= submit_tag "login" %>
-  <% end %>
+  <%= render :template =>'sessions/new'%>
 <% end %>
 
 </body>

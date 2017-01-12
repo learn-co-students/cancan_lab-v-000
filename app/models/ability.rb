@@ -9,10 +9,10 @@ class Ability
       alias_action :create, :read, :update, :destroy, to: :crud
 
       can :read, Note do |note|
-        note.readers.include(user)
+        note.readers.include? user
       end
 
-      can :crud, Note, :user_id == user.id if user.id
+      can :manage, Note, {:user_id => user.id}
 
     #   if user.admin?
     #     can :manage, :all
