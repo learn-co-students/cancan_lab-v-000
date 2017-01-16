@@ -31,7 +31,7 @@ RSpec.describe Ability do
         assert abilities[name].can? :read, private_notes[name]
       end
     end
-    
+
     it "can't :read posts they're not viewers of" do
       assert abilities[:eve].cannot? :read, alice_to_beth
     end
