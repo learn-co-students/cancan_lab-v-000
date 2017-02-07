@@ -5,8 +5,8 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.create(params.require(:note).permit(:content, :visible_to))
-    authorize! :create, @note
+    authorize! :create, Note
+    @note = Note.create(note_params)
     @note.viewers.create(user_id: current_user.id)
     redirect_to root_path
   end
@@ -15,6 +15,13 @@ class NotesController < ApplicationController
   end
 
   def update
+    authorize! :update, Note
+    @note = Note.find_by(id: params[:id])
+    #@note.readers.clear
+    @note.update(note_params)
+    #@note.viewers.create(user_id: current_user.id)
+
+    redirect_to root_path
   end
 
   def destroy
@@ -22,5 +29,11 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.all
+  end
+
+private
+
+  def note_params
+    params.require(:note).permit(:content, :visible_to)
   end
 end

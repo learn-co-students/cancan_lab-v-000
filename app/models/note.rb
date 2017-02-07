@@ -9,9 +9,12 @@ class Note < ActiveRecord::Base
 
   def visible_to=(name)
     if !name.empty?
-      name.map do |name|
-        @reader = self.readers.find_or_create_by(name: name)
+      name = name.split.each do |name|
+        @user = self.readers.build(name: name)
+        @user.save
+
       end
+      #byebug
     end
   end
 

@@ -5,6 +5,7 @@ class Ability
     unless user.nil?
       can :read, Note
       can :create, Note
+      can :update, Note
 
     end
     # Define abilities for the passed in user here. For example:
