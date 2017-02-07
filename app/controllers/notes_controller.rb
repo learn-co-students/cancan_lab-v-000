@@ -20,7 +20,7 @@ class NotesController < ApplicationController
     #@note.readers.clear
     @note.update(note_params)
     #@note.viewers.create(user_id: current_user.id)
-
+    #byebug
     redirect_to root_path
   end
 
