@@ -4,12 +4,12 @@ class Note < ActiveRecord::Base
   has_many :readers, through: :viewers, source: :user
 
   def visible_to
-    self.viewers
+    self.readers.map {|user| user.name}.join(", ")
   end
 
   def visible_to=(name)
     if !name.empty?
-      name.split.each do |name|
+      name.split(", ").each do |name|
         self.readers << User.find_by(name: name)
       end
     end
