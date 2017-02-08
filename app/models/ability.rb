@@ -2,12 +2,21 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    unless user.nil?
-      can :read, Note
-      can :create, Note
-      can :update, Note
 
+    unless user.nil?
+      can :read, Note do |note|
+        #raise note.readers.inspect
+        #byebug
+        note.readers.include?(user) || note.user == user
+      end
+
+      can :update, Note do |note|
+        note.user == user
+      end
+      can :create, Note
     end
+
+  end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -34,5 +43,5 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-  end
+
 end
