@@ -1,6 +1,15 @@
 <h1>Notes</h1>
 <% @notes.each do |note| %>
-  <p><%= link_to "click to read", note_path(note) %></p>
+  <% if can? :read, note %>
+    <div class="note">
+      <p><b><%= note.user.name %> says:</b></p>
+      <p><em><%= note.content %></em></p>
+      <p>This note is visible to: <%= !note.visible_to.blank? ? note.visible_to : "only you"%></p>
+        <% if can? :manage, note %>
+        <p><%= link_to "Edit", edit_note_path(note) %></p>
+        <% end %>
+    </div>
+  <% end %>
 <% end %>
 <%= link_to "Add a note", new_note_path %>
 <%= button_to "Log out", logout_path, method: :delete %>

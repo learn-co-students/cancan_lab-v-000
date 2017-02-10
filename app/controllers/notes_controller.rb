@@ -24,10 +24,6 @@ class NotesController < ApplicationController
 
   end
 
-  def show
-    @note = Note.find_by_id(params[:id])
-  end
-
   def update
     @note.readers.clear
     @note.update(note_params)
