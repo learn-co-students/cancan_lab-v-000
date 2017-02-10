@@ -1,0 +1,6 @@
+<h1>Notes</h1>
+<% @notes.each do |note| %>
+  <p><%= link_to "click to read", note_path(note) %></p>
+<% end %>
+<%= link_to "Add a note", new_note_path %>
+<%= button_to "Log out", logout_path, method: :delete %>

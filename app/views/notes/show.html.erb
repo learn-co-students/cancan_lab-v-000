@@ -1,0 +1,7 @@
+<p><%= @note.user.name %> says:</p>
+<p><%= @note.content %></p>
+<p>This note is visible to: <%= !@note.visible_to.blank? ? @note.visible_to : "only you"%></p>
+<% if can? :manage, @note %>
+<p><%= link_to "Edit", edit_note_path(@note) %></p>
+<% end %>
+<%= link_to "back", root_path %>
