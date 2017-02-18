@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   load_and_authorize_resource
+  # before_action :unless_logged_in?
 
   def index
     @notes = Note.all
@@ -10,7 +11,8 @@ class NotesController < ApplicationController
   end
 
   def new
-      @note = Note.new
+    @note = Note.new
+    authorize! :create, @note
   end
 
   def create
@@ -18,11 +20,18 @@ class NotesController < ApplicationController
 
     @note.user_id = current_user.id
     @note.save
-    redirect_to note_path(@note)
+    redirect_to notes_path(@note)
   end
 
   def edit
     @note = Note.find(params[:id])
+    authorize! :update, @note
+  end
+
+  def update
+    @note = Note.find(params[:id])
+    @note.update(note_params)
+    redirect_to notes_path(@note)
   end
 
   private

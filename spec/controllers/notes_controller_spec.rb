@@ -11,8 +11,9 @@ RSpec.describe NotesController, type: :controller do
       alice = users(:alice)
       content = 'secret message'
       session[:user_id] = alice.id
-      post :create, note: {content: content, visible_to: ''}
+      post :create, note: {content: content, user_id: session[:user_id], visible_to: ''}
       assert_redirected_to '/'
+      # session => {"user_id"=>1, "flash"=>{"discard"=>[], "flashes"=>{"alert"=>"You are not authorized to access this page."}}}
       note = Note.last
       assert note.content == content
       assert note.readers == [alice]
@@ -26,7 +27,7 @@ RSpec.describe NotesController, type: :controller do
       session[:user_id] = beth.id
       
       content = 'oh so secret'
-      post :create, note: {content: content, visible_to: ''}
+      post :create, note: {content: content, user_id: session[:user_id], visible_to: ''}
       note_id = Note.last.id
       assert Note.find(note_id).content == content
 

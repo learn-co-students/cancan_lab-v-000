@@ -6,15 +6,13 @@ class Ability
     # user ||= User.new
     can :index, Note
 
-    can :read, Note do |note|
-        note.visible_to == (user.name)
-        { user_id: user.id}
-    end
-    
     unless user.nil?
+        can :read, Note, { visible_to: user.name}
+        can :read, Note, { user_id: user.id}
         can :create, Note
-        can :update, Note, { user_id: user.id}
+        can :manage, Note, { user_id: user.id}
     end
+
     # if user.admin?
     #     can :manage, Note
     # end
