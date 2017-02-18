@@ -1,0 +1,9 @@
+<h1>Notes Index</h1>
+<% if can? :create, Note %>
+  <%= link_to 'Create New Note', new_note_path %>
+<% end %>
+<br></br>
+<% @notes.each do |n| %>
+  <%= link_to n.content, n %>
+  <br>
+<% end %>
