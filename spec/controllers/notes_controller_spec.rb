@@ -11,7 +11,7 @@ RSpec.describe NotesController, type: :controller do
       alice = users(:alice)
       content = 'secret message'
       session[:user_id] = alice.id
-      post :create, note: {content: content, user_id: session[:user_id], visible_to: ''}
+      post :create, note: {content: content, visible_to: ''}
       assert_redirected_to '/'
       # session => {"user_id"=>1, "flash"=>{"discard"=>[], "flashes"=>{"alert"=>"You are not authorized to access this page."}}}
       note = Note.last
@@ -25,7 +25,6 @@ RSpec.describe NotesController, type: :controller do
     it "can update your own notes" do
       alice, beth = users(:alice), users(:beth)
       session[:user_id] = beth.id
-      
       content = 'oh so secret'
       post :create, note: {content: content, user_id: session[:user_id], visible_to: ''}
       note_id = Note.last.id

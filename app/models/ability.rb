@@ -5,7 +5,6 @@ class Ability
     # Comment out the below line after fixing the Note models
     # user ||= User.new
     can :index, Note
-
     unless user.nil?
         can :read, Note, { visible_to: user.name}
         can :read, Note, { user_id: user.id}
