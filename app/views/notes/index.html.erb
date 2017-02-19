@@ -1,0 +1,6 @@
+<% @notes.each do |note| %>
+  <p><%= link_to note.content, note_path(note) %> - <%= note.user.name %></p>
+  <% if can? :update, note %>
+    <%= link_to 'edit', edit_note_path(note) %>
+  <% end %>
+<% end %>
