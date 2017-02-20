@@ -1,0 +1,6 @@
+<% Note.all.each do |note| %>
+  <% if can? :read, note %> 
+    <%= note.content %>
+  <% end %>
+  Hi
+<% end %>
