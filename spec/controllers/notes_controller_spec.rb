@@ -35,7 +35,7 @@ RSpec.describe NotesController, type: :controller do
       assert_redirected_to '/'
       note = Note.find(note_id)
       assert note.content == new_content
-      assert note.readers == [alice, beth]
+      expect(note.readers).to match_array([alice, beth])
     end
   end
 end
