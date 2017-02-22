@@ -1,0 +1,18 @@
+<h1>Log In</h1>
+
+<%= form_tag session_path method: 'post' do %>
+  <%= text_field_tag :name %>
+
+  <br></br>
+  <%= submit_tag 'Log In' %>
+<% end %>
+
+<h1>OR</h1>
+
+<h2>Create A New User</h2>
+
+<%= form_tag users_create_path method: 'post' do %>
+  <%= text_field_tag :name %>
+  <br></br>
+  <%= submit_tag 'Create New User' %>
+<% end %>
