@@ -1,0 +1,8 @@
+<p>Content: <%= note.content %></p>
+<br><br>
+
+<p>Writer: <%= note.user.name %></p>
+<br><br>
+
+<p>If this is your note you may <%= link_to "edit", edit_note_path(note) %> this.</p>
+<br><br>
