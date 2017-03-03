@@ -4,12 +4,21 @@ class Ability
   def initialize(user)
 
     can :read, Note do |note|
-      note.readers.include?(user) || note.user == user
+      user.readable.include?(note) || note.user == user
     end
 
     can :update, Note do |note|
       note.user == user
     end
+
+    can :manage, Note, { user_id: user.id}
+
+    # unless user.nil? # guest
+    #   can :create, Note
+    #   # can :update, Note, { user_id: user.id }
+    #   can :manage, Note, { user_id: user.id }
+    # end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

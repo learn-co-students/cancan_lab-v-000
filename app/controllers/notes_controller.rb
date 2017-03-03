@@ -18,6 +18,7 @@ class NotesController < ApplicationController
   end
 
   def create
+    # binding.pry
     @note = Note.new(note_params)
     @user = User.find_by(id: session[:user_id])
     @note.user = @user
