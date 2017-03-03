@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170303173900) do
 
   create_table "notes", force: :cascade do |t|
     t.string   "content"
+    t.string   "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
