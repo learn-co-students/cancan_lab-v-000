@@ -2,9 +2,7 @@ class Note < ActiveRecord::Base
     has_many :viewers
     has_many :readers, through: :viewers, source: :user
     belongs_to :user
-    # validates :content, presence: true
-    # accepts_nested_attributes_for :note
-    
+
     def visible_to=(viewer)
       viewers = viewer.split(",")
       viewers.each do |each_viewer|
@@ -12,7 +10,7 @@ class Note < ActiveRecord::Base
       end
       self.save
     end
-    
+
     def visible_to
         viewer_string = ""
         self.readers.each_with_index do |reader, index|
@@ -24,5 +22,5 @@ class Note < ActiveRecord::Base
         end
         viewer_string
     end
-    
+
 end

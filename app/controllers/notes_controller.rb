@@ -1,8 +1,6 @@
 class NotesController < ApplicationController
     load_and_authorize_resource
-    before_action :set_notes, only: [:show, :edit, :update]
-    # before_action :require_login
-    # skip_before_action :require_login, only: [:index]
+    before_action :set_note, only: [:show, :edit, :update]
 
     def index
         @notes = Note.all
@@ -21,16 +19,20 @@ class NotesController < ApplicationController
     end
 
     def create
-      @note = Note.create(note_params(:content, :user_id))
-    #   @note.readers << User.find(note_params(:user_id))
+      @note = Note.create(note_params(:content))
+      @note.user_id = session[:user_id]
       @note.readers << @note.user
       @note.save
-      redirect_to note_path(@note)
+      redirect_to root_path(@note)
     end
 
     def update
-     @note.update(note_params(:content, :user_id))
-      redirect_to note_path(@note)
+     @note.update(note_params(:content))
+     @note.readers.clear
+     @note.visible_to = params[:note][:visible_to]
+     @note.readers << @note.user
+     @note.save
+      redirect_to root_path(@note)
     end
 
     private
@@ -40,7 +42,6 @@ class NotesController < ApplicationController
     end
 
     def note_params(*args)
-        # binding.pry
       params.require(:note).permit(*args)
     end
 
