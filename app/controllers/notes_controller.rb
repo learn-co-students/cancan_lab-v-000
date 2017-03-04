@@ -21,9 +21,10 @@ class NotesController < ApplicationController
     end
 
     def create
-        # binding.pry
-      # @note = Note.find_or_create_by(notes_params(:content))
       @note = Note.create(note_params(:content, :user_id))
+    #   @note.readers << User.find(note_params(:user_id))
+      @note.readers << @note.user
+      @note.save
       redirect_to note_path(@note)
     end
 

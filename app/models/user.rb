@@ -2,5 +2,5 @@ class User < ActiveRecord::Base
     has_many :viewers
     has_many :readable, through: :viewers, source: :note
     has_many :notes
-    validates :name, presence: true
+    # validates :name, presence: true
 end

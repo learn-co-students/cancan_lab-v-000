@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
   # end
 
     def create
-        session[:name] = params[:name] if params[:name]
-        if session[:name]
-            redirect_to new_path if session[:name].length < 1 #blank name
-        else #no session name
+        session[:user_id] = params[:user_id] if params[:user_id]
+        if session[:user_id]
+            redirect_to root_path 
+        else #no session user
             redirect_to new_path
         end
 
