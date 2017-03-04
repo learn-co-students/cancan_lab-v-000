@@ -20,8 +20,6 @@ class NotesController < ApplicationController
 
     def create
       @note = Note.create(note_params(:content))
-      # binding.pry
-      # @note.user_id = session[:user_id]
       @note.user = current_user
       @note.readers << @note.user
       @note.save
