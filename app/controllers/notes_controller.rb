@@ -21,7 +21,7 @@ class NotesController < ApplicationController
     def create
       @note = Note.create(note_params(:content))
       @note.user = current_user
-      @note.readers << @note.user
+      # @note.readers << @note.user
       @note.save
       redirect_to root_path(@note)
     end
@@ -30,7 +30,7 @@ class NotesController < ApplicationController
      @note.update(note_params(:content))
      @note.readers.clear
      @note.visible_to = params[:note][:visible_to]
-     @note.readers << @note.user
+     # @note.readers << @note.user
      @note.save
       redirect_to root_path(@note)
     end

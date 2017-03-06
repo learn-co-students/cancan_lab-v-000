@@ -5,8 +5,9 @@ class Ability
 
         unless user.nil? # guest
           can :create, Note
-          can :update, Note, { user_id: user.id }
-          can :read, Note, { user_id: user.id }
+          can :manage, Note, { user_id: user.id }
+          # can :update, Note, { user_id: user.id }
+          # can :read, Note, { user_id: user.id }
           can :read, Note do |note|
             note.readers.include? user
           end
