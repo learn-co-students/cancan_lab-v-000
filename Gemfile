@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'pry'
+# gem 'learn-co'
+gem 'pry-rails'
 gem 'cancancan'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
