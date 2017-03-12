@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+	load_and_authorize_resource only: [:edit, :show, :update]
 
 	def index
 		if session[:user_id].nil?
@@ -14,21 +15,30 @@ class NotesController < ApplicationController
 	end
 
 	def create
-		@note = Note.new(note_params)
-		@note.user = current_user
-		if @note.save
-			redirect_to notes_path, notice: "Note successfully created :)"
+		if logged_in?
+			@note = Note.new(note_params)
+			@note.user = current_user
+			if @note.save
+				redirect_to root_path, notice: "Note successfully created :)"
+			else
+				render :new, alert: "Oops, something went wrong, please try again."
+			end			
 		else
-			render :new, alert: "Oops, something went wrong, please try again."
+			redirect_to root_path, alert: "You need to be logged in to create a Note"
 		end
 	end
 
 	def edit
-		
+		@note = Note.find_by(id: params[:id])
 	end
 
 	def update
-		
+		@note = Note.find_by(id: params[:id])
+		if @note.update(note_params)
+			redirect_to root_path, notice: "Note updated, thanks!"
+		else
+			redirect_to root_path, alert: "Error updating note"
+		end
 	end
 
 	def destroy
@@ -37,6 +47,6 @@ class NotesController < ApplicationController
 
 	private
 		def note_params
-			params.require(:note).permit(:content)
+			params.require(:note).permit(:content, :visible_to)
 		end
 end
