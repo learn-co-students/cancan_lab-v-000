@@ -14,13 +14,17 @@ class NotesController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def edit
+  end
+
   def update
     @note = Note.find(params[:id])
-    if @note.update(note_params)
-      redirect_to '/'
-    else
-      render :edit
-    end 
+    @note.update(note_params)
+    # raise @note.readers.inspect
+    redirect_to '/'
   end
 
   private

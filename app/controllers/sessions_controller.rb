@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.create(name: params[:user][:name])
+    user = User.find_or_create_by(name: params[:user][:name])
     session[:user_id] = user.id
     redirect_to root_path
   end
