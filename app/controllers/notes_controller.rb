@@ -1,22 +1,32 @@
 class NotesController < ApplicationController
+  load_and_authorize_resource
 
   def new
-    @note = Note.new
   end
 
   def create
     if logged_in?
-      note = Note.new(note_params)
-      redirect_to note_path(note)
+      note = current_user.notes.create(note_params)
+      note.readers << current_user
+      redirect_to '/'
     else
-      redirect_to "/"
+      redirect_to '/'
     end
+  end
+
+  def update
+    @note = Note.find(params[:id])
+    if @note.update(note_params)
+      redirect_to '/'
+    else
+      render :edit
+    end 
   end
 
   private
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :visible_to)
   end
 
 end
