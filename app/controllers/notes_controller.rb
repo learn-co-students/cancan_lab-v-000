@@ -9,7 +9,7 @@ class NotesController < ApplicationController
       note = Note.new(note_params)
       redirect_to note_path(note)
     else
-      redirect_to login_path
+      redirect_to "/"
     end
   end
 
@@ -17,6 +17,6 @@ class NotesController < ApplicationController
 
   def note_params
     params.require(:note).permit(:content)
-  end 
+  end
 
 end
