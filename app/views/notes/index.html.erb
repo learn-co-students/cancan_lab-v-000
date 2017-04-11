@@ -1,0 +1,5 @@
+<ul>
+<% @notes.each do |note| %>
+<li><%= note.content %> <%= link_to("edit", edit_note_path(note)) if note.user == current_user %></li>
+<% end %>
+</ul>
