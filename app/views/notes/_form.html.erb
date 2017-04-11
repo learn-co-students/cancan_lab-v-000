@@ -1,0 +1,7 @@
+<%= form_for @note do |f|%>
+<br><%= f.label :content %>
+<br><%= f.text_field :content%>
+<br><%= f.label :readers %>
+<br><%= f.collection_check_boxes :readers, User.all, :id, :name%>
+<br><%= f.submit %>
+<% end %>
