@@ -2,9 +2,8 @@ class NotesController < ApplicationController
   load_and_authorize_resource
 
   def create
-    redirect_to '/' if !logged_in
-    binding.pry
-    current_user.readable.new(note_params).save
+    redirect_to '/' if !logged_in?
+    current_user.notes.new(note_params).save
     redirect_to '/'
   end
 
