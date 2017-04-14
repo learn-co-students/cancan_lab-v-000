@@ -5,6 +5,7 @@ class Note < ActiveRecord::Base
   before_save :set_owner_as_reader
 
   def visible_to
+    self.readers.collect { |r| r.name }.join(', ')
   end
 
   def visible_to=(user_list)

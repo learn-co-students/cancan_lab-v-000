@@ -3,7 +3,9 @@ class Ability
 
   def initialize(user)
 
-    can :read, Note
+    can :read, Note do |note|
+      note.readers.include? user
+    end
 
     unless user.nil?
       can :create, Note
