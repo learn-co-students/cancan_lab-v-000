@@ -1,4 +1,5 @@
 class Note < ActiveRecord::Base
+  belongs_to :user
   has_many :viewers
   has_many :readers, through: :viewers, source: :user
 
@@ -6,7 +7,6 @@ class Note < ActiveRecord::Base
   end
 
   def visible_to=(user_list)
-    binding.pry
   end
 
 end
