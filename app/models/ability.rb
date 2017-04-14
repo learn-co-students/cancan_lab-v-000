@@ -2,14 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
     can :read, Note
 
-    unless user.nil? # guest
-      # CanCan accepts a hash of conditions;
-      # here, we're saying that the Post's user_id
-      # needs to match the requesting User's id
+    unless user.nil?
       can :create, Note
-      # can :update, Note, { user_id: user.id }
+      can :manage, Note, { user_id: user.id }
     end
 
     # Define abilities for the passed in user here. For example:

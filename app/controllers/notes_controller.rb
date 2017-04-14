@@ -8,6 +8,9 @@ class NotesController < ApplicationController
   end
 
   def update
+    note = Note.find_by(id: params[:id])
+    note.update(note_params)
+    redirect_to '/'
   end
 
   private

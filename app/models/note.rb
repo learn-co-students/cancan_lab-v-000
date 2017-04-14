@@ -8,6 +8,12 @@ class Note < ActiveRecord::Base
   end
 
   def visible_to=(user_list)
+    user_list.split(', ').each { |username|
+      reader_user = User.find_by(name: username)
+      if !reader_user.nil?
+        self.readers << reader_user unless self.readers.include? reader_user
+      end
+    }
   end
 
 private
