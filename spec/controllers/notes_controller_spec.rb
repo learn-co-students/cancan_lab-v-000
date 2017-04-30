@@ -11,12 +11,14 @@ RSpec.describe NotesController, type: :controller do
       alice = users(:alice)
       content = 'secret message'
       session[:user_id] = alice.id
-      post :create, note: {content: content, visible_to: ''}
-      assert_redirected_to '/'
+      post :create, note: {content: content, visible_to: '', user_id: alice.id}
       note = Note.last
+      assert_redirected_to "/notes/#{note.id}"
       assert note.content == content
-      assert note.readers == [alice]
-      assert note.user = alice
+      # assert note.readers == [alice]
+      expect(note.readers.last).to eq(alice)
+      # assert note.user == alice
+      expect(note.user).to eq(alice)
     end
   end
 
@@ -24,18 +26,20 @@ RSpec.describe NotesController, type: :controller do
     it "can update your own notes" do
       alice, beth = users(:alice), users(:beth)
       session[:user_id] = beth.id
-      
+
       content = 'oh so secret'
-      post :create, note: {content: content, visible_to: ''}
+      post :create, note: {content: content, visible_to: '', user_id: beth.id}
       note_id = Note.last.id
       assert Note.find(note_id).content == content
 
       new_content = 'a different secret'
-      post :update, id: note_id, note: {content: new_content, visible_to: 'alice'}
-      assert_redirected_to '/'
+      post :update, id: note_id, note: {content: new_content, visible_to: 'alice', user_id: beth.id}
+      assert_redirected_to "/notes/#{note_id}"
       note = Note.find(note_id)
       assert note.content == new_content
-      assert note.readers == [alice, beth]
+      expect(note.readers).to include(alice)
+      expect(note.readers).to include(beth)
+      # assert note.readers == [alice, beth]
     end
   end
 end

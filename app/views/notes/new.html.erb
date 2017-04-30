@@ -1,0 +1,11 @@
+<% if can? :create, @note %>
+
+  <h1>Create a new note</h1>
+
+  <%= render 'notes/note_form' %>
+
+<% else %>
+
+<h2>You cannot create a note</h2>
+
+<% end %>

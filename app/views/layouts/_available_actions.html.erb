@@ -1,0 +1,4 @@
+<% if current_user %>
+<%= link_to "Create a note", new_note_path %>
+<span>Hello <%= current_user.name %></span>
+<% end %>

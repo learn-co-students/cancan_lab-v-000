@@ -1,0 +1,10 @@
+<%= form_for @note do |f| %>
+
+  <%= hidden_field_tag :'note[user_id]', current_user.id %>
+  <%= f.label :content %><br>
+  <%= f.text_area :content %><br><br>
+  <%= f.label :visible_to %><br>
+  <%= f.text_area :visible_to %><br><br>
+  <%= f.submit %>
+
+<% end %>
