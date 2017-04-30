@@ -1,0 +1,14 @@
+<h1>Note <%= @note.id %></h1>
+
+<p>
+  <%= @note.content %>
+</p>
+
+<div>
+  <p>
+    <% if can? :update, @note %>
+      <%= link_to "Edit note", edit_note_path(@note) %>
+    <% end %>
+  </p>
+  <p><%= link_to "New note", new_note_path %></p>
+</div>
