@@ -1,0 +1,2 @@
+module NotestControllerHelper
+end
