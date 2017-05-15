@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :show, :update, :create]
 
   def create
-    @note.save!
+    raise @user.inspect
     redirect_to '/'
   end
 
