@@ -32,6 +32,10 @@ class Ability
       note.user_id == user.id
     end
 
+    can :create, Note do |note|
+      !!user
+    end
+
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
