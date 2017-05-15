@@ -1,0 +1,11 @@
+users/new <br>
+
+<h2>Create a new user:</h2>
+<%= form_for @user do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+
+<p>Already have a name?</p>
+<%= link_to 'Log In', '/login' %>
