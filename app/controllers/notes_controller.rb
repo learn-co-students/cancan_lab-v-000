@@ -2,7 +2,15 @@ class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :show, :update, :create]
 
   def create
-    raise @user.inspect
+    @note.user_id = current_user.id
+    current_user.notes << @note
+    @note.readers << current_user
+    @note.save!
+    redirect_to '/'
+  end
+
+  def update
+    @note.update!(note_params)
     redirect_to '/'
   end
 
