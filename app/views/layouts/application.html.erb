@@ -10,5 +10,8 @@
 
 <%= yield %>
 
+
+<br>
+<%= link_to 'Log Out', '/logout' if !!current_user %>
 </body>
 </html>

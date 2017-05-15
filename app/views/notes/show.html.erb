@@ -1,0 +1,7 @@
+notes/show <br>
+
+<%= @note.content %>
+
+<% if can? :update, @note %>
+  <%= link_to "Edit", edit_note_path(@note) %>
+<% end %>

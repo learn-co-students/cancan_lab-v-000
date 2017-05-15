@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  load_and_authorize_resource only: [:edit, :show, :update, :create]
+  load_and_authorize_resource only: [:edit, :show, :update, :create, :new]
 
   def create
     @note.user_id = current_user.id
@@ -16,6 +16,7 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.all
+    redirect_to login_path unless !!current_user
   end
 
   private

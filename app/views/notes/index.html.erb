@@ -2,6 +2,9 @@ views/notes/index <br>
 
 <% @notes.each do |note| %>
   <p><%= note.content %></p>
-  <p>-Written by <%= note.user.name %></p>  
+  <p>-Written by <%= note.user.name %></p>
   <br>
 <% end %>
+
+<br>
+<%= link_to 'New Note', new_note_path %>
