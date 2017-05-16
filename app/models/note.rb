@@ -11,10 +11,14 @@ class Note < ActiveRecord::Base
 	end
 
 	def visible_to=(names)
-		self.readers = names.split(", ").collect { |name| User.find_by(name: name) }
+	#	names.split(", ").each { |name| self.readers << User.find_by(name: name) }
+	names = names.split(", ").collect { |name| User.find_by(name: name) }
 	end 
 
 	def visible_to
-		self.readers.collect { |reader| reader.name }.join(", ")
+		names.collect { |reader| reader.name }.join(", ")
 	end
+
+	
+
 end
