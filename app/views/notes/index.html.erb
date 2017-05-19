@@ -1,0 +1,5 @@
+<% @notes.each do |note| %>
+	<%= "#{note.user.name}'s Note" %>
+	<%= note.content %>
+	<br>
+<% end %>

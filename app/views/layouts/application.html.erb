@@ -8,6 +8,18 @@
 </head>
 <body>
 
+<% if current_user %>
+	<h1><%= "#{current_user.name}'s Notes" %></h1>
+	<%= form_tag('/logout', method: :post) do %>
+	<%= link_to "new note", '/notes/new' %>
+    <input type=submit value='Logout'>
+  <% end %>
+ <% else %>
+ 	<%= form_tag('/login', method: :post) do %>
+	    <input name=name placeholder='Login'>
+	  <% end %>
+	<% end %>
+
 <%= yield %>
 
 </body>
