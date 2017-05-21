@@ -2,17 +2,17 @@ class NotesController < ApplicationController
   load_and_authorize_resource only: [:edit, :show, :update]
   
   def new
-   if !signed_in_user
-     redirect_to login_path
-   end
    @note = current_user.notes.build
+   authorize! :new, @note
   end
 
   def create
    
     if current_user
       note = current_user.notes.create(note_params)
+      binding.pry
       redirect_to note_path(note)
+      authorize! :create, note
     else
       redirect_to '/'
     end
