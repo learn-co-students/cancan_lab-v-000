@@ -7,6 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <navbar>
+    <%= link_to "Notes", notes_path %>
+    <%if current_user %>
+      <%= link_to "Sign out", logout_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign in", login_path %>
+    <%end%>
+  </navbar>
+  <%= flash[:alert]%>
 
 <%= yield %>
 

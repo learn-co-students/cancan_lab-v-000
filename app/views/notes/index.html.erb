@@ -1,0 +1,8 @@
+<div>
+  <h1><% if current_user && current_user.notes != []%></h1>
+    <h1>Hello <%= current_user.name%>, here are your recent posts:</h1>x
+    <% current_user.notes.each do |note| %>
+      <p><%= note.content %></p>
+    <% end %>
+  <% end %>
+</div>
