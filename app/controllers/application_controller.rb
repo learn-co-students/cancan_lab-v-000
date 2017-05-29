@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_user
-    User.find_by(name: session[:name])
+    User.find_by(id: session[:user_id])
   end
   helper_method :current_user
 
@@ -16,9 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    respond_to do |format|
-      redirect_to root_path, alert: exception.message
-    end
+    redirect_to root_path, alert: exception.message
   end
   
 end

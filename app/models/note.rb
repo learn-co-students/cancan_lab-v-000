@@ -14,4 +14,12 @@ class Note < ActiveRecord::Base
       User.find_or_create_by(name: name.strip)
     end
   end
+
+  def add_owner_to_readers(current_user)
+    if !readers.include?(current_user)
+      readers << current_user
+    end
+  end
+
+  
 end
