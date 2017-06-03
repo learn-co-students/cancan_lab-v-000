@@ -1,0 +1,7 @@
+<%= form_for(note) do |f| %>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+    <%#= f.hidden_field session[:user_id], :as => :user_id %>
+    <%= f.text_field :visible_to %>
+    <%= f.submit %>
+<% end %>
