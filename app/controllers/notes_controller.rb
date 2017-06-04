@@ -21,11 +21,9 @@ class NotesController < ApplicationController
     end
 
     def show
-        @note = Note.find_by(id: params[:id])
     end
 
     def edit
-        @note = Note.find_by(id: params[:id])
     end
 
     def update
@@ -34,7 +32,6 @@ class NotesController < ApplicationController
     end
 
     def delete
-        @note = Note.find_by(id: params[:id])
         @note.delete
         redirect_to '/'
     end

@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+    return unless user # guest user can't do anything
     can :manage, Note do |note|
         note.user_id == user.id
     end

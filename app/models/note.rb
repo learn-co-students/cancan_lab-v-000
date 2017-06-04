@@ -2,7 +2,7 @@ class Note < ActiveRecord::Base
     belongs_to :user
     has_many :viewers
     has_many :readers, through: :viewers, source: :user
-    before_save :ensure_owner_can_read
+    before_save :ensure_owner_can_read #callback
 
     def visible_to
         self.readers.map {|reader| reader.name}.join(', ')
