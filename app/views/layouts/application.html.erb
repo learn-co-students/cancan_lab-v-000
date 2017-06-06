@@ -8,6 +8,8 @@
 </head>
 <body>
 
+  <%= link_to "Home", notes_path %> <%= link_to "Logout", logout_path unless !session[:user_id]%>
+
 <%= yield %>
 
 </body>
