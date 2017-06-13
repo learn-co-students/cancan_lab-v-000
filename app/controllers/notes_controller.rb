@@ -26,7 +26,7 @@ class NotesController < ApplicationController
 		# binding.pry
 		note.update(note_params)
 		authorize! :update, note
-		binding.pry
+		# binding.pry
 		redirect_to root_path
 	end
 
