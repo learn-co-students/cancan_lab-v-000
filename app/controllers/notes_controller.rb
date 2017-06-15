@@ -1,8 +1,12 @@
 class NotesController < ApplicationController
+  load_and_authorize_resource only: [:edit, :show, :update]
+
   def index
+    @notes = Note.all
   end
 
   def show
+    @note = Note.find_by(id: params[:id])
   end
 
   def new
@@ -26,6 +30,8 @@ class NotesController < ApplicationController
   end
 
   def destroy
+    @note.destroy
+    redirect_to '/login'
   end
 
   private

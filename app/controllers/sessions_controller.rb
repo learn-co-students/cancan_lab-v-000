@@ -4,9 +4,11 @@ class SessionsController < ApplicationController
 
   def create
     session[:user_id] = User.find_or_create_by(name: params[:name]).id
-    # if session[:user_id].nil? || session[:user_id].empty?
-    #   redirect_to sessions_new_path
-    # else
-    #   redirect_to '/'
-    # end
+    redirect_to notes_path
+  end
+
+  def destroy
+    session.clear
+    redirect_to '/login'
+  end
 end

@@ -1,0 +1,7 @@
+<h2>Your secret message!</h2>
+
+<h3><%= @note.content %></h3>
+
+<% if can? :update, @note %>
+  <%= link_to "Edit", edit_note_path(@note) %>
+<% end %>
