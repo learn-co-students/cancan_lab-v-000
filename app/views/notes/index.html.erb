@@ -1,0 +1,3 @@
+<% @notes.each do |note| %>
+  <%= link_to("Note #{note.id}", note_path(note)) %>
+<% end %>
