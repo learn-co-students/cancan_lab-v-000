@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'pry'
+
 gem 'cancancan'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
@@ -44,4 +46,3 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
 end
-

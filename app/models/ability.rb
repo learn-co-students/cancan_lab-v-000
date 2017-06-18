@@ -28,9 +28,13 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-
-    can :read, Note do |note|
-      # TODO
+    if !user.nil?
+      can :create, Note
+      can :edit, Note, user_id: user.id
+      can :destroy, Note, user_id: user.id
+      can :read, Note do |note|
+        # TODO
+      end
     end
   end
 end

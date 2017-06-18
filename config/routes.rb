@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/sign_up' => 'users#new'
   post '/sign_up' => 'users#create'
 
-  resource :notes
+  resources :notes
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
