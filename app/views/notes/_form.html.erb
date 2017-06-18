@@ -1,0 +1,4 @@
+<%= form_for(@note) do |f| %>
+  <%= f.text_area :content %>
+  <%= f.collection_check_boxes :visible_to, User.all, :name, :name %>
+<% end %>
