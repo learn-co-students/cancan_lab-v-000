@@ -32,8 +32,9 @@ class Ability
       can :create, Note
       can :edit, Note, user_id: user.id
       can :destroy, Note, user_id: user.id
+      can :update, Note, user_id: user.id
       can :read, Note do |note|
-        # TODO
+        !!note.viewers.find_by(user_id: user.id) || note.user_id == user.id
       end
     end
   end
