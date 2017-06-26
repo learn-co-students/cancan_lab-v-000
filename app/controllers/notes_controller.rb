@@ -10,6 +10,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    authorize! :read, @note
   end
 
   def index
@@ -21,7 +22,6 @@ class NotesController < ApplicationController
   end
 
   def update
-    fdfd.dfdf
     @note = Note.find(params[:id])
     if @note.update(note_params)
       redirect_to note_path(@note)
@@ -40,7 +40,7 @@ class NotesController < ApplicationController
 
   def note_params
     params.require(:note).permit(:content,:user_id,
-      readers: :id
+      readers_attributes:[:name]
     )
   end
 end

@@ -3,9 +3,11 @@
 <p><%= @note.user.name if @note.user %> - <%= @note.content %></p>
 
 <h3>Who can see this note:</h3>
+<ul>
 <% @note.readers.each do |reader| %>
-  <%= reader.name %><br>
+  <li><%= reader.name %></li>
 <% end %>
+</ul>
 
 <%= link_to "edit", edit_note_path(@note) %>
 <%= link_to "delete", note_path(@note), method: :delete %>

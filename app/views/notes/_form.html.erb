@@ -4,8 +4,8 @@
   <br>
 
   <%= f.fields_for :readers, @note.readers.build do |readers_f| %>
-    <%= readers_f.label :id, "Readers" %>
-    <%= readers_f.text_field :id %>
+    <%= readers_f.label :name, "Readers" %>
+    <%= readers_f.text_field :name %>
   <% end %>
   <br>
 

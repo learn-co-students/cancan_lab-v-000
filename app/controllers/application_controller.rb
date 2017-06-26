@@ -3,12 +3,16 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-def current_user
-  @user ||= User.find(session[:user_id])
-end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: exception.message
+  end
 
-def logged_in?
-  !!current_user
-end
+  def current_user
+    @user ||= User.find(session[:user_id])
+  end
+
+  def logged_in?
+    !!current_user
+  end
 
 end
