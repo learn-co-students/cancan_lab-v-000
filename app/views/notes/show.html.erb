@@ -1,0 +1,11 @@
+<h1>show</h1>
+
+<p><%= @note.user.name if @note.user %> - <%= @note.content %></p>
+
+<h3>Who can see this note:</h3>
+<% @note.readers.each do |reader| %>
+  <%= reader.name %><br>
+<% end %>
+
+<%= link_to "edit", edit_note_path(@note) %>
+<%= link_to "delete", note_path(@note), method: :delete %>

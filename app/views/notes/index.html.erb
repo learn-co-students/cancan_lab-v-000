@@ -1,0 +1,6 @@
+<h1>INDEXED!</h1>
+
+<% @notes.each do |note| %>
+  <%= link_to note.content, note_path(note) %>
+  <br>
+<% end %>

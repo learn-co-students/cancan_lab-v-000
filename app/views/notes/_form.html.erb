@@ -1,0 +1,15 @@
+<%= form_for @note do |f|%>
+  <%= f.label :content, "Post Content" %>
+  <%= f.text_field :content %>
+  <br>
+
+  <%= f.fields_for :readers, @note.readers.build do |readers_f| %>
+    <%= readers_f.label :id, "Readers" %>
+    <%= readers_f.text_field :id %>
+  <% end %>
+  <br>
+
+  <input type="hidden" name="note[user_id]" value="<%= current_user.id %>"></input>
+
+  <%= f.submit %>
+<% end %>
