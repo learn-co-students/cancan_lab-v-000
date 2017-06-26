@@ -1,0 +1,6 @@
+<h1>Edit Post: </h1>
+
+<%= form_for(@note) do |f| %>
+  <%= f.text_field :content, placeholder: @note.content %>
+  <%= f.submit %>
+<% end %>
