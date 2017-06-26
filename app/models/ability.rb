@@ -6,6 +6,13 @@ class Ability
       note.readers.include?(user) || note.user == user
     end
 
+    can :update, Note do |note|
+      note.user == user
+    end
+
+    if user
+      can :create, :note
+    end
 
     # Define abilities for the passed in user here. For example:
     #

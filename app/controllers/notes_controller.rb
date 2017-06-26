@@ -1,11 +1,20 @@
 class NotesController < ApplicationController
   def new
+    authorize! :create, :note
     @note = Note.new()
   end
 
   def create
-    @note = Note.create(note_params)
-    redirect_to note_path(@note)
+    authorize! :create, :note
+
+    #look at this garbage to pass the test
+    arg_params = {:user_id => current_user.id}
+    note_params.each do |key,val|
+      arg_params[key] = val
+    end
+
+    @note = Note.create(arg_params)
+    redirect_to root_path
   end
 
   def show
@@ -14,17 +23,22 @@ class NotesController < ApplicationController
   end
 
   def index
-    @notes = Note.all
+    if logged_in?
+      @notes = current_user.readable.uniq
+    else
+      redirect_to root_path
+    end
   end
 
   def edit
     @note = Note.find(params[:id])
+    authorize! :update, @note
   end
 
   def update
     @note = Note.find(params[:id])
     if @note.update(note_params)
-      redirect_to note_path(@note)
+      redirect_to root_path
     else
       render :edit
     end
@@ -39,8 +53,8 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:content,:user_id,
-      readers_attributes:[:name]
+    params.require(:note).permit(:content,
+      :visible_to
     )
   end
 end
