@@ -1,0 +1,11 @@
+<h2> Message Board </h2>
+
+<% @notes.each do |note| %>
+<p>
+  <h3> <%= link_to "#{note.content}, note_path(note)" %></h3>
+</p>
+<% end %>
+
+<button><%= link_to "New Note", new_note_path %></button>
+
+<%= button_to "Logout", logout_path %>
