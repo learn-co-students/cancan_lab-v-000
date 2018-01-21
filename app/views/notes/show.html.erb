@@ -1,0 +1,16 @@
+<h1>Note:</h1>
+<% if can?(:update, @note) %>
+  <%= link_to "Edit", edit_note_path %>
+<% end %>
+
+<h2>Content:</h2>
+
+<%= @note.content %>
+
+<h3>Visible to:</h3>
+
+<%= content_tag :ul do %>
+  <% @note.readers.each do |user| %>
+    <%= content_tag :li, user.name %>
+  <% end %>
+<% end %>

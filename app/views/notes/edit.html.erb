@@ -1,0 +1,11 @@
+<% if can? :update, @note %>
+
+  <h1>Edit this note</h1>
+
+  <%= render 'notes/note_form' %>
+
+<% else %>
+
+<h2>You cannot modify this note</h2>
+
+<% end %>
