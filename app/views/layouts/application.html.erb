@@ -8,6 +8,18 @@
 </head>
 <body>
 
+  <% if current_user %>
+    <h1>Welcome <%= current_user.name.capitalize %></h1>
+    <%= link_to 'Logout', logout_path, :method => :delete %>
+  <% end %>
+
+  <% if !current_user %>
+    <%= form_for :user, :url => "/login" do |f| %>
+      Sign in - Username: <%= f.text_field :name %>
+      <%= f.submit "Login" %>
+    <% end %>
+  <% end %>
+
 <%= yield %>
 
 </body>
