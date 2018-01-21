@@ -8,6 +8,20 @@
 </head>
 <body>
 
+  <% if true %>
+    <%= form_tag('/logout', method: :post, class: 'session-logout') do %>
+      <input type=submit value='log out'>
+    <% end %>
+    <nav class='note-tools'>
+      <%= link_to "new note", '/notes/new' %>
+    </nav>
+  <% else %>
+    <%= form_tag('/login', method: :post, class: 'session-login') do %>
+      <input name=name placeholder='sign in as someone else'>
+      <input type=submit value='log in'>
+    <% end %>
+  <% end %>
+
 <%= yield %>
 
 </body>
