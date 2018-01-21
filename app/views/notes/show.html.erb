@@ -1,0 +1,17 @@
+This Note says:<br>
+<%= @note.content %><br><br>
+
+This note is by:<br>
+<% if @note.user_id %>
+  <%= User.find_by(:id => @note.user_id).name %><br><br>
+<% else %>
+  No one.<br><br>
+<% end %>
+
+Permitted Readers:<br>
+  <% @note.readers.each do |reader| %>
+    <%= reader.name %><br>
+  <% end %>
+  <br><br>
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

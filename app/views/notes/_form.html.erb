@@ -1,0 +1,10 @@
+<%= form_for(@note) do |f| %>
+  New Note:<br>
+  <%= f.text_area :content %><br><br>
+  Permitted Readers:<br>
+  <%= f.text_area :visible_to %><br><br>
+  <%= f.hidden_field :user_id, :value => session[:user_id] %>
+  
+  
+  <%= f.submit %>
+<% end %>
