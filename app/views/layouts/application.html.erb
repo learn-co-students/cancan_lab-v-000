@@ -7,6 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="session">
+    <% if current_user %>
+     Hi, <%= current_user.name %>
+     <%= form_tag('/logout', method: post, class: 'session_logout') do %>
+       <input type="submit" value="log out">
+     <% end %>
+     <%= form_tag('/login', method: post, class: :'session_login') do %>
+       <input name="name" placeholder="log in with your name">
+     <% end %>
+  </div>
+
 
 <%= yield %>
 
