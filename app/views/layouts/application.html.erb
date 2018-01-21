@@ -7,6 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- Style logout -->
+  <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'delete'}) do %>
+    <input type=submit value='logout'>
+  <% end %>
 
 <%= yield %>
 
