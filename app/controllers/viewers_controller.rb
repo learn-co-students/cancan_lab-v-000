@@ -1,0 +1,3 @@
+class ViewersController < ApplicationController
+
+end
