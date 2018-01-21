@@ -26,7 +26,7 @@ RSpec.describe NotesController, type: :controller do
       session[:user_id] = beth.id
       
       content = 'oh so secret'
-      post :create, note: {content: content, visible_to: ''}
+      post :create, note: {content: content, user_id: session[:user_id], visible_to: ''}
       note_id = Note.last.id
       assert Note.find(note_id).content == content
 
