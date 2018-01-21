@@ -1,0 +1,12 @@
+<%= @note.content %>
+<% @note.readers.each do |reader| %>
+  <%= reader.name %>
+<% end %>
+
+<% if can? :update, @note %>
+  <%= link_to "Edit", edit_note_path(@note) %>
+<% end %>
+
+<% if cannot? :update, @note %>
+  Editing disabled.
+<% end %>
