@@ -1,0 +1,19 @@
+<iframe src="//giphy.com/embed/R4ARBcmICvEgo" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<h1><%= "Hey #{current_user.name}, " unless session[:user_id].nil? %>Welcome to the Secret Notes APP</h1>
+<p>This is a site to view secret notes.</p>
+
+<% if session[:user_id] %>
+	<h3>You have <%= pluralize(current_user.notes.count, "note") %></h3>
+	<ul>
+	<% @notes.each do |note| %>
+		<li>"<%= note.content %>"</li>
+	<% end %>
+	</ul>
+
+	<%= form_tag({controller: "sessions", action:"destroy", method:"post"}) do %>
+		<%= submit_tag "Log Me Out" %>
+	<% end %>
+<% else %>
+	<p>Seems like you are not logged in yet, <%= link_to "create an account", login_path %></p>
+<% end %>
+

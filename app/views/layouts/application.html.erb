@@ -7,6 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render "layouts/nav" %>
+
+<% flash.each do |item, msg| %>
+	<%= content_tag :div, msg, id: item %>
+<% end %>
 
 <%= yield %>
 
