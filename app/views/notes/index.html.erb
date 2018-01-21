@@ -1,0 +1,5 @@
+<%= @notes.each do |note| %>
+  <%= note.content if note.content %>
+  <%= note.readers if note.readers %>
+  <%= note.user if note.user %>
+<%end%>
