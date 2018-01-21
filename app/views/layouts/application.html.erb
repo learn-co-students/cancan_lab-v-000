@@ -7,8 +7,46 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="navbar navbar-default navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to 'iNote', root_path, class: 'navbar-brand' %>
+      </div>
+      <div id="navbar">
+        <ul class="nav navbar-nav">
+          <% if can? :create, Note %>
+            <li><%= link_to 'Add Note', new_note_path %></li>
+          <%end%>
+        </ul>
+        <% if logged_in? %>
+        <ul class="nav navbar-nav pull-right">
+          <div class="navbar-header">
+          <%= link_to 'Log out', logout_path, class: 'navbar-brand'%>
+        </div>
+        <% else %>
+        <ul class="nav navbar-nav pull-right">
+          <div class="navbar-header">
+          <%= link_to 'Register', new_user_path, class: 'navbar-brand'%>
+        </div>
+        <ul class="nav navbar-nav pull-right">
+          <div class="navbar-header">
+          <%= link_to 'Login', users_path, class: 'navbar-brand'%>
+        </div>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </nav>
 
-<%= yield %>
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <%= value %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+
 
 </body>
 </html>
