@@ -1,0 +1,12 @@
+<h1>#<%= @note.id %></h1>
+<p><%= @note.content %></p>
+<p>Creator: <%= @note.user.name %></p>
+<p>Visible to: <%= @note.visible_to %></p>
+<% if can? :edit, @note %>
+  <%= link_to "Edit", edit_note_path(@note) %>
+<% end %>
+
+<% if can? :delete, @note %>
+  <%= button_to "Delete", note_path(@note), method: 'delete' %>
+<% end %>
+<%= link_to "All Notes", notes_path %>
