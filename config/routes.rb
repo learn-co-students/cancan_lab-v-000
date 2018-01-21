@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  resource :users, only: :create
+  resource :notes
+  resource :sessions, only: [:new, :create, :destroy]
+  root 'notes#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
