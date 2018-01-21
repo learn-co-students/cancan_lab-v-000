@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  resource :notes
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  post '/logout', to: 'sessions#destroy'
+  # get '/notes/:id', to: 'notes#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'notes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
