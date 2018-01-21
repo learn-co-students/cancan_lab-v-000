@@ -8,7 +8,28 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class='session'>
+
+    <% if current_user %>
+
+      <%= form_tag('/logout', method: :post) do %>
+        <input type="submit" value="Log out" >
+      <% end %>
+    <% else %>
+      <%= form_tag('/login', method: :post) do %>
+        <input type="text_field" name="name" placeholder="Name">
+        <input type="submit" value="Sign Up/Log In" >
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+  <div class="note">
+    <%= link_to("Create New Note", '/notes/new') %>
+  </div>
+
+  <%= yield %>
 
 </body>
 </html>

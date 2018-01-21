@@ -1,0 +1,5 @@
+<% if cannot? :read, @note %>
+  You do not have permission to read this.
+<% else %>
+  <%= render partial: 'note', locals: {note: @note} %>
+<% end %>
