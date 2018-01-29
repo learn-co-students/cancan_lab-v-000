@@ -7,6 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user %>
+  Hello, <%= current_user.name %>
+    <%=form_tag('/logout', method: :post) do %>
+    <input type='submit' value="log out">
+    <%end%>
+    <%=link_to 'new note', new_note_path%>
+<% else %>
+    <%=form_tag('/login', method: :post) do %>
+    <input name='name'>
+    <input type='submit' value='log in'>
+    <%end%>
+<% end %>
 
 <%= yield %>
 
