@@ -7,8 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class='session'>
+    <% if current_user %>
+    Hi, <%= current_user.name %>
+    <%= form_tag('/logout', method: :post, class: 'session-logout') do %>
+      <input type=submit value='Log Out'>
+    <% end %>
+  <% end %>
 
-<%= yield %>
+    <%= form_tag('/login', method: :post, class: 'session-login') do %>
+      <input name=name placeholder='Sign in as someone else'>
+    <% end %>
+  </div>
+
+  <nav class='note-tools'>
+    <%= link_to 'new note', '/notes/new' %>
+  </nav>
+
+    <%= yield %>
 
 </body>
 </html>
